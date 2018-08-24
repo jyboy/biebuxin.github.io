@@ -1,0 +1,712 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="爬虫,Node.js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近用手机登录了一下饮水思源BBS，结果发现了一种更为简便抓取十大热门话题标题和链接的方法。">
+<meta name="keywords" content="爬虫,Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="获取BBS十大热门话题方法探讨（二）">
+<meta property="og:url" content="https://biebu.xin/2016/07/14/获取BBS十大热门话题方法探讨（二）/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="最近用手机登录了一下饮水思源BBS，结果发现了一种更为简便抓取十大热门话题标题和链接的方法。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.429Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="获取BBS十大热门话题方法探讨（二）">
+<meta name="twitter:description" content="最近用手机登录了一下饮水思源BBS，结果发现了一种更为简便抓取十大热门话题标题和链接的方法。">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2016/07/14/获取BBS十大热门话题方法探讨（二）/" />
+
+
+  <title> 获取BBS十大热门话题方法探讨（二） | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                获取BBS十大热门话题方法探讨（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-07-14T01:05:52+08:00" content="2016-07-14">
+              2016-07-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近用手机登录了一下<a href="https://bbs.sjtu.edu.cn/frame2.html" target="_blank" rel="noopener">饮水思源BBS</a>，结果发现了一种更为简便抓取十大热门话题标题和链接的方法。</p>
+<a id="more"></a>
+<p>上篇文章在探讨这个问题时，由于框架的存在，并不能直接用<code>https</code>模块获取整个网页内容。但是，最近用手机登录时发现了一个没有框架并且直接是十大热门话题的<a href="https://bbs.sjtu.edu.cn/file/bbs/mobile/top100.html" target="_blank" rel="noopener">网页</a>，接下来就好办了，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">var</span> iconv = <span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"><span class="keyword">var</span> publicUrl = <span class="string">"https://bbs.sjtu.edu.cn"</span>;</span><br><span class="line"><span class="keyword">var</span> indexUrl = <span class="string">"https://bbs.sjtu.edu.cn/file/bbs/mobile/top100.html"</span>;</span><br><span class="line"><span class="keyword">var</span> topicTitles = [];</span><br><span class="line"><span class="keyword">var</span> topicUrls = [];</span><br><span class="line"></span><br><span class="line">https.get(indexUrl, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    res.setEncoding(<span class="string">'binary'</span>);</span><br><span class="line">    <span class="keyword">var</span> source = <span class="string">""</span>;</span><br><span class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        source += data;</span><br><span class="line">    &#125;);</span><br><span class="line">    res.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer(source, <span class="string">'binary'</span>);</span><br><span class="line">        <span class="keyword">var</span> str = iconv.decode(buf, <span class="string">'GBK'</span>);</span><br><span class="line">        <span class="keyword">var</span> $ = cheerio.load(str);</span><br><span class="line">        $(<span class="string">"a:odd"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> topicTitle = $(<span class="keyword">this</span>).text();</span><br><span class="line">            <span class="keyword">var</span> topicTitleStop = topicTitle.length - <span class="number">122</span>;</span><br><span class="line">            topicTitle = topicTitle.substring(<span class="number">0</span>, topicTitleStop);</span><br><span class="line">            <span class="keyword">var</span> topicUrl = publicUrl + $(<span class="keyword">this</span>).attr(<span class="string">"href"</span>);</span><br><span class="line">            topicTitles.push(topicTitle);</span><br><span class="line">            topicUrls.push(topicUrl);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">console</span>.log(topicTitles);</span><br><span class="line">        <span class="built_in">console</span>.log(topicUrls);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>先用<code>https</code>的<code>get()</code>方法获取整个网页，再用<code>cheerio</code>处理得到标题和链接。由于<code>Node.js</code>只支持utf-8编码，中间采用了<code>iconv-lite</code>模块，官方这样描述道：</p>
+<blockquote>
+<p>Pure JS character encoding conversion</p>
+</blockquote>
+<p>运行上述代码，报错：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">SyntaxError: unmatched pseudo-<span class="class"><span class="keyword">class</span> :<span class="type">odd</span></span></span><br></pre></td></tr></table></figure>
+<p>原因是虽然<code>cheerio</code>和<code>jQuery</code>的用法一样一样的，但有些<code>jQuery</code>的选择器并不被<code>cheerio</code>支持，如<code>:odd</code>。在<a href="http://stackoverflow.com/questions/20672237/can-i-add-more-jquery-selectors-to-cheerio-node-js" target="_blank" rel="noopener">Stack Overflow</a>中找到了解决方法，修改后的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">var</span> iconv = <span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"><span class="keyword">var</span> publicUrl = <span class="string">"https://bbs.sjtu.edu.cn"</span>;</span><br><span class="line"><span class="keyword">var</span> indexUrl = <span class="string">"https://bbs.sjtu.edu.cn/file/bbs/mobile/top100.html"</span>;</span><br><span class="line"><span class="keyword">var</span> topics = [];</span><br><span class="line"></span><br><span class="line">https.get(indexUrl, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    res.setEncoding(<span class="string">'binary'</span>);</span><br><span class="line">    <span class="keyword">var</span> source = <span class="string">""</span>;</span><br><span class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        source += data;</span><br><span class="line">    &#125;);</span><br><span class="line">    res.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer(source, <span class="string">'binary'</span>);</span><br><span class="line">        <span class="keyword">var</span> str = iconv.decode(buf, <span class="string">'GBK'</span>);</span><br><span class="line">        <span class="keyword">var</span> $ = cheerio.load(str);</span><br><span class="line">        cheerio.prototype.odd = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> odds = [];</span><br><span class="line">            <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params">index, item</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (index % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">                    odds.push(item);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="keyword">return</span> cheerio(odds);</span><br><span class="line">        &#125;;</span><br><span class="line">        $(<span class="string">"a"</span>).odd().each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> topicTitle = $(<span class="keyword">this</span>).text();</span><br><span class="line">            <span class="keyword">var</span> topicTitleStop = topicTitle.length - <span class="number">122</span>;</span><br><span class="line">            topicTitle = topicTitle.substring(<span class="number">0</span>, topicTitleStop);</span><br><span class="line">            <span class="keyword">var</span> topicUrl = publicUrl + $(<span class="keyword">this</span>).attr(<span class="string">"href"</span>);</span><br><span class="line">            <span class="keyword">var</span> topic = &#123;</span><br><span class="line">                topicTitle: topicTitle,</span><br><span class="line">                topicUrl: topicUrl</span><br><span class="line">            &#125;;</span><br><span class="line">            topics.push(topic);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">console</span>.log(topics);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样错误消除了，结果输出也更直观，如下：</p>
+<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">[ &#123; topicTitle: <span class="symbol">'F又变身OMO</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=SJTUNews&amp;reid=1468554320</span></span><br><span class="line">' &#125;,</span><br><span class="line">  &#123; topicTitle: <span class="symbol">'证明高数上的一个定理</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=joke&amp;reid=1468519051</span>' &#125;,</span><br><span class="line"></span><br><span class="line">  &#123; topicTitle: <span class="symbol">'成熟靠谱男青年征婚~盐城的北大毕业定居国外</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=LoveBridge&amp;reid=14685147</span></span><br><span class="line"><span class="number">91</span>' &#125;,</span><br><span class="line">  &#123; topicTitle: <span class="symbol">'欧美多恐怖袭击死伤数百显社会主义中国优越性</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=SJTUNews&amp;reid=1468551449</span></span><br><span class="line">' &#125;,</span><br><span class="line">  &#123; topicTitle: <span class="symbol">'李政道图书馆的参观问题</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=Library&amp;reid=1468546291</span>'</span><br><span class="line"> &#125;,</span><br><span class="line">  &#123; topicTitle: <span class="symbol">'第68届美国电视黄金时段艾美奖完整提名</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=WesternTV&amp;reid=146855382</span></span><br><span class="line"><span class="number">6</span>' &#125;,</span><br><span class="line">  &#123; topicTitle: <span class="symbol">'左前轮和左后轮补胎，可以把左前换到右后吗？</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=automobile&amp;reid=14685482</span></span><br><span class="line"><span class="number">71</span>' &#125;,</span><br><span class="line">  &#123; topicTitle: '[<span class="name">挂牌</span>][<span class="name">女</span>]<span class="number">92</span>年妹子诚征另一半',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=LoveBridge&amp;reid=14685606</span></span><br><span class="line"><span class="number">81</span>' &#125;,</span><br><span class="line">  &#123; topicTitle: <span class="symbol">'【代挂】87年张江IT男诚意寻有缘MM</span>',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=LoveBridge&amp;reid=14685715</span></span><br><span class="line"><span class="number">40</span>' &#125;,</span><br><span class="line">  &#123; topicTitle: <span class="symbol">'推荐一个提供免费VPN账号的网站</span> http://xfree.p',</span><br><span class="line">    topicUrl: <span class="symbol">'https://bbs.sjtu.edu.cn/bbswaptcon?board=Graduate&amp;reid=1468516809</span></span><br><span class="line">' &#125; ]</span><br></pre></td></tr></table></figure>
+<p>仅供学习交流，以上。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫/" rel="tag">#爬虫</a>
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/07/获取BBS十大热门话题方法探讨/" rel="next" title="获取BBS十大热门话题方法探讨">
+                <i class="fa fa-chevron-left"></i> 获取BBS十大热门话题方法探讨
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/16/获取贴吧热贴方法探讨/" rel="prev" title="获取贴吧热贴方法探讨">
+                获取贴吧热贴方法探讨 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank">
+                  
+                    <i class="fa fa-medium"></i>
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank">
+                  
+                    <i class="fa fa-hacker-news"></i>
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          <p align='center'>WeChat ID: biebuxin</p>
+          <p align='center'>
+          <img src="/images/wechat.jpg" />
+          </p>
+        </div>
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

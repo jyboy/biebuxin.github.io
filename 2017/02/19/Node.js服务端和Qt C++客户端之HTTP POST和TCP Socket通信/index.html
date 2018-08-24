@@ -1,0 +1,727 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="Node.js,C++,POST,Socket," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近有个需求，需要将Qt/C++客户端的一些数据传输至Node.js服务端，有些需要一次性发送，另外一些由于更新频率高，需要建立Socket长链接。Google了一下，发现这方面的资料少得可怜，而自己在摸索的过程中也走了不少弯路，于是把这几天学到的东西整理了一下，以Demo的形式把HTTP POST和TCP Socket通信过程加以实现。">
+<meta name="keywords" content="Node.js,C++,POST,Socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js服务端和Qt C++客户端之HTTP POST和TCP Socket通信">
+<meta property="og:url" content="https://biebu.xin/2017/02/19/Node.js服务端和Qt C++客户端之HTTP POST和TCP Socket通信/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="最近有个需求，需要将Qt/C++客户端的一些数据传输至Node.js服务端，有些需要一次性发送，另外一些由于更新频率高，需要建立Socket长链接。Google了一下，发现这方面的资料少得可怜，而自己在摸索的过程中也走了不少弯路，于是把这几天学到的东西整理了一下，以Demo的形式把HTTP POST和TCP Socket通信过程加以实现。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js服务端和Qt C++客户端之HTTP POST和TCP Socket通信">
+<meta name="twitter:description" content="最近有个需求，需要将Qt/C++客户端的一些数据传输至Node.js服务端，有些需要一次性发送，另外一些由于更新频率高，需要建立Socket长链接。Google了一下，发现这方面的资料少得可怜，而自己在摸索的过程中也走了不少弯路，于是把这几天学到的东西整理了一下，以Demo的形式把HTTP POST和TCP Socket通信过程加以实现。">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2017/02/19/Node.js服务端和Qt C++客户端之HTTP POST和TCP Socket通信/" />
+
+
+  <title> Node.js服务端和Qt C++客户端之HTTP POST和TCP Socket通信 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node.js服务端和Qt C++客户端之HTTP POST和TCP Socket通信
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-19T20:03:36+08:00" content="2017-02-19">
+              2017-02-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近有个需求，需要将Qt/C++客户端的一些数据传输至Node.js服务端，有些需要一次性发送，另外一些由于更新频率高，需要建立Socket长链接。Google了一下，发现这方面的资料少得可怜，而自己在摸索的过程中也走了不少弯路，于是把这几天学到的东西整理了一下，以Demo的形式把HTTP POST和TCP Socket通信过程加以实现。</p>
+<a id="more"></a>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p>客户端向服务端一次性发送一些数据，最直接的就是HTTP请求的POST方法了，而如果需要建立Socket长链接，则有很多选择。我首先尝试的是<code>WebSocket</code>，Node.js有一个很给力的<code>ws</code>模块，而Qt虽然有<code>WebSockets</code>这个C++类，但实际应用的话是要先斟酌一下的。这一块本来是个第三方的模块，后来被Qt给采纳了，所以有版本兼容性和稳定性的问题。还有<code>Socket.IO</code>，是一个面向实时web应用的库，主要使用WebSocket协议，最大的特点就是兼容性好，不支持WebSocket的时候自动回退到其他方法，但应用的话服务端和客户端都需要使用该框架，而且它对C++的支持并不是“原生”的。最后一个就是<code>TCP Socket</code>了，Node.js有用于底层网络通信的内置模块<code>Net</code>提供原生支持，Qt也通过<code>QTcpSocket</code>对其实现了很好的支持。综上，采用<code>TCP Socket</code>通信成了首选。</p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="Qt-C-客户端"><a href="#Qt-C-客户端" class="headerlink" title="Qt/C++客户端"></a>Qt/C++客户端</h3><p>在Qt Creator中新建一个项目，在头文件中引用需要的系统头文件：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QBuffer&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QJsonObject&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QJsonDocument&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QJsonArray&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QUrl&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkRequest&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkAccessManager&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkReply&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QTcpSocket&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>添加成员变量：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QNetworkAccessManager* networkManager;</span><br><span class="line">    QTcpSocket *textTcpSocket;</span><br><span class="line">    QTcpSocket *imageTcpSocket;</span><br><span class="line">    QByteArray imageData;</span><br></pre></td></tr></table></figure>
+<p>添加槽函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">receiveImageTcpSocketMessage</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>在源文件的构造函数中，添加如下代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">networkManager = <span class="keyword">new</span> QNetworkAccessManager();</span><br><span class="line">textTcpSocket = <span class="keyword">new</span> QTcpSocket();</span><br><span class="line">imageTcpSocket = <span class="keyword">new</span> QTcpSocket();</span><br><span class="line">connect(imageTcpSocket, SIGNAL(readyRead()), <span class="keyword">this</span>, SLOT(receiveImageTcpSocketMessage()));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过HTTP请求的POST方法发送一个对象</span></span><br><span class="line">QJsonObject jsonObjPost;</span><br><span class="line">jsonObjPost.insert(<span class="string">"method"</span>, <span class="string">"post"</span>);</span><br><span class="line">jsonObjPost.insert(<span class="string">"message"</span>, <span class="string">"biebu.xin"</span>);</span><br><span class="line">QByteArray postData = QJsonDocument(jsonObjPost).toJson(QJsonDocument::Compact);</span><br><span class="line"><span class="function">QUrl <span class="title">postUrl</span><span class="params">(<span class="string">"http://127.0.0.1:8080"</span>)</span></span>;</span><br><span class="line"><span class="function">QNetworkRequest <span class="title">postRequest</span><span class="params">(postUrl)</span></span>;</span><br><span class="line">postRequest.setHeader(QNetworkRequest::ContentTypeHeader, <span class="string">"application/json; charset=utf-8"</span>);</span><br><span class="line">networkManager-&gt;post(postRequest, postData);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过TCP Socket连接服务端并发送一个对象</span></span><br><span class="line">textTcpSocket-&gt;<span class="built_in">abort</span>();</span><br><span class="line">textTcpSocket-&gt;connectToHost(<span class="string">"127.0.0.1"</span>, <span class="number">8081</span>);</span><br><span class="line">QJsonObject jsonObjSocket;</span><br><span class="line">jsonObjSocket.insert(<span class="string">"method"</span>, <span class="string">"socket"</span>);</span><br><span class="line">jsonObjSocket.insert(<span class="string">"message"</span>, <span class="string">"biebu.xin"</span>);</span><br><span class="line">QByteArray textData = QJsonDocument(jsonObjSocket).toJson(QJsonDocument::Compact);</span><br><span class="line">textTcpSocket-&gt;write(textData);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过TCP Socket连接服务端并上传一张图片</span></span><br><span class="line">imageTcpSocket-&gt;<span class="built_in">abort</span>();</span><br><span class="line">imageTcpSocket-&gt;connectToHost(<span class="string">"127.0.0.1"</span>, <span class="number">8082</span>);</span><br><span class="line">QImage image;</span><br><span class="line">image.load(<span class="string">"demo.jpg"</span>, <span class="string">"JPG"</span>);</span><br><span class="line"><span class="function">QBuffer <span class="title">buffer</span><span class="params">(&amp;imageData)</span></span>;</span><br><span class="line">image.save(&amp;buffer, <span class="string">"JPG"</span>);</span><br><span class="line">imageTcpSocket-&gt;write(QByteArray::number(imageData.size()));</span><br></pre></td></tr></table></figure>
+<p>定义<code>receiveImageTcpSocketMessage()</code>函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">QByteArray message = imageTcpSocket-&gt;readAll();</span><br><span class="line"><span class="keyword">if</span> (message.toInt()) &#123;</span><br><span class="line">    imageTcpSocket-&gt;write(imageData);</span><br><span class="line">    imageData.resize(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发送图片的时候，如果直接把图片数据发过去，有可能会出现需要分多次传输导致服务端单次接收数据不完整的情况。所以，一种稳妥的做法是，先把图片大小发过去，然后再发送图片数据。</p>
+<h3 id="Node-js服务端"><a href="#Node-js服务端" class="headerlink" title="Node.js服务端"></a>Node.js服务端</h3><p>新建一个js文件，加载内置模块：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br></pre></td></tr></table></figure>
+<p>创建HTTP服务器：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> source = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    req.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        source += data;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    req.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Post data: <span class="subst">$&#123;source.toString()&#125;</span>`</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).listen(<span class="number">8080</span>, <span class="string">'127.0.0.1'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Http server listening on port 8080 at host 127.0.0.1'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>创建用于接收文本的TCP Socket服务器：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">net.createServer(<span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'textClient connected'</span>);</span><br><span class="line"></span><br><span class="line">    socket.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Socket textData: <span class="subst">$&#123;data.toString()&#125;</span>`</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    socket.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'textClient disconnected'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).listen(<span class="number">8081</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Socket server for text started on port 8081'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>创建用于接收图片的TCP Socket服务器：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">net.createServer(<span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'imageClient connected'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> imageSize = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> imageBufferArray = [];</span><br><span class="line"></span><br><span class="line">    socket.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (imageSize) &#123;</span><br><span class="line">            <span class="comment">// 接收和拼接数据，当数据长度不够时，下一次继续</span></span><br><span class="line">            imageBufferArray.push(data);</span><br><span class="line">            <span class="keyword">let</span> imageData = Buffer.concat(imageBufferArray);</span><br><span class="line">            <span class="keyword">if</span> (imageData.byteLength &gt;= imageSize) &#123;</span><br><span class="line">                <span class="comment">// 数据完整，写入文件</span></span><br><span class="line">                fs.writeFile(<span class="string">`demo.jpg`</span>, imageData, (err) =&gt; &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'Save socket image success'</span>);</span><br><span class="line">                    imageSize = <span class="number">0</span>;</span><br><span class="line">                    imageBufferArray = [];</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            imageSize = <span class="built_in">parseInt</span>(data.toString());</span><br><span class="line">            socket.write(<span class="string">'1'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    socket.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'imageClient disconnected'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).listen(<span class="number">8082</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Socket server for image started on port 8082'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>服务端先启动，客户端运行后，服务端的终端中会打印运行结果：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">Socket<span class="built_in"> server </span><span class="keyword">for</span> text started on<span class="built_in"> port </span>8081</span><br><span class="line">Socket<span class="built_in"> server </span><span class="keyword">for</span> image started on<span class="built_in"> port </span>8082</span><br><span class="line">Http<span class="built_in"> server </span>listening on<span class="built_in"> port </span>8080 at host 127.0.0.1</span><br><span class="line">textClient connected</span><br><span class="line">imageClient connected</span><br><span class="line">Socket textData: &#123;<span class="string">"message"</span>:<span class="string">"biebu.xin"</span>,<span class="string">"method"</span>:<span class="string">"socket"</span>&#125;</span><br><span class="line">Post data: &#123;<span class="string">"message"</span>:<span class="string">"biebu.xin"</span>,<span class="string">"method"</span>:<span class="string">"post"</span>&#125;</span><br><span class="line">Save socket image success</span><br></pre></td></tr></table></figure>
+<p>可以看出，Qt客户端发送的数据这里都是采用QByteArray类型的，而Node.js接收的时候，不管是<code>http</code>模块，还是<code>net</code>模块，其data事件的参数都是一个<code>Buffer</code>，<code>fs</code>写入文件的图片数据，也是<code>Buffer</code>对象。注意到这点，就可以根据实际需求灵活编程了。</p>
+<p>需要强调的是，这是个最小Demo，错误处理的部分都省略了，而在实际编程的过程中一定要考虑周全哦～</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/POST/" rel="tag">#POST</a>
+          
+            <a href="/tags/Socket/" rel="tag">#Socket</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/22/微信小程序之复杂富文本解析变通实现/" rel="next" title="微信小程序之复杂富文本解析变通实现">
+                <i class="fa fa-chevron-left"></i> 微信小程序之复杂富文本解析变通实现
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/24/在Ubuntu上为Ionic-2搭建Android开发环境/" rel="prev" title="在Ubuntu上为Ionic 2搭建Android开发环境">
+                在Ubuntu上为Ionic 2搭建Android开发环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank">
+                  
+                    <i class="fa fa-medium"></i>
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank">
+                  
+                    <i class="fa fa-hacker-news"></i>
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          <p align='center'>WeChat ID: biebuxin</p>
+          <p align='center'>
+          <img src="/images/wechat.jpg" />
+          </p>
+        </div>
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#技术选型"><span class="nav-number">1.</span> <span class="nav-text">技术选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">2.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Qt-C-客户端"><span class="nav-number">2.1.</span> <span class="nav-text">Qt/C++客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js服务端"><span class="nav-number">2.2.</span> <span class="nav-text">Node.js服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果"><span class="nav-number">2.3.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

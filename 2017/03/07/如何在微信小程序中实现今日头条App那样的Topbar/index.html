@@ -1,0 +1,731 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="Web前端,小程序," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="今日头条App的Topbar是一个典型的频道管理和切换组件，自己前段时间研究了一番，在微信小程序上也实现了类似的效果。">
+<meta name="keywords" content="Web前端,小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在微信小程序中实现今日头条App那样的Topbar">
+<meta property="og:url" content="https://biebu.xin/2017/03/07/如何在微信小程序中实现今日头条App那样的Topbar/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="今日头条App的Topbar是一个典型的频道管理和切换组件，自己前段时间研究了一番，在微信小程序上也实现了类似的效果。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://biebu.xin/images/posts/wx-topbar-1.gif">
+<meta property="og:image" content="https://biebu.xin/images/posts/wx-topbar-2.gif">
+<meta property="og:image" content="https://biebu.xin/images/posts/wx-topbar-3.gif">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在微信小程序中实现今日头条App那样的Topbar">
+<meta name="twitter:description" content="今日头条App的Topbar是一个典型的频道管理和切换组件，自己前段时间研究了一番，在微信小程序上也实现了类似的效果。">
+<meta name="twitter:image" content="https://biebu.xin/images/posts/wx-topbar-1.gif">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2017/03/07/如何在微信小程序中实现今日头条App那样的Topbar/" />
+
+
+  <title> 如何在微信小程序中实现今日头条App那样的Topbar | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                如何在微信小程序中实现今日头条App那样的Topbar
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-03-07T16:31:03+08:00" content="2017-03-07">
+              2017-03-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">小程序</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今日头条App的Topbar是一个典型的频道管理和切换组件，自己前段时间研究了一番，在微信小程序上也实现了类似的效果。</p>
+<a id="more"></a>
+<p>我们先看具体效果好了 ↓↓↓</p>
+<p><img src="../../../../images/posts/wx-topbar-1.gif" alt="wx-topbar-1"></p>
+<p><img src="../../../../images/posts/wx-topbar-2.gif" alt="wx-topbar-2"></p>
+<p><img src="../../../../images/posts/wx-topbar-3.gif" alt="wx-topbar-3"></p>
+<p>这个项目(wx-topbar)已经放在<code>GitHub</code>上了——<a href="https://github.com/jyboy/wx-topbar" target="_blank" rel="noopener">点此前往</a>，欢迎学习交流。</p>
+<p>接下来，简要说一下实现思路。</p>
+<p>先看视图层，Topbar横向滚动对应的<code>WXML</code>代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">scroll-view</span> <span class="attr">class</span>=<span class="string">"navbar"</span> <span class="attr">scroll-x</span>=<span class="string">"true"</span> <span class="attr">scroll-left</span>=<span class="string">"&#123;&#123;scrollNavbarLeft&#125;&#125;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"navbar-item &#123;&#123; navbarArray[item].type &#125;&#125;"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123; item &#125;&#125;"</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123; navbarShowIndexArray &#125;&#125;"</span> <span class="attr">catchtap</span>=<span class="string">"onTapNavbar"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"navbar-item-wrap"</span>&gt;</span>&#123;&#123; navbarArray[item].text &#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"navbar-item visibility-hidden"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"navbar-item-wrap"</span>&gt;</span>空白<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scroll-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"navbar-arrow-down"</span> <span class="attr">catchtap</span>=<span class="string">"showChannelSettingModal"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"navbar-arrow-down-wrap"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">"navbar-arrow-icon"</span> <span class="attr">src</span>=<span class="string">"/images/index/icon_arrow_down.png"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>scroll-view</code>负责Topbar中各个频道的呈现，所有频道的相关数据都存储在<code>navbarArray</code>这个对象数组里，而数组<code>navbarShowIndexArray</code>里存储了要显示频道在数组<code>navbarArray</code>中的索引。</p>
+<p>不难猜测，频道是否选中高亮，与数组<code>navbarArray</code>有关；频道是否显示，与数组<code>navbarShowIndexArray</code>有关。</p>
+<p>点击某个频道名称，就会触发对应频道的切换操作。</p>
+<p><code>view.navbar-arrow-down</code>对应的是右上角的向下箭头，可采用<code>fixed</code>定位类型，点击后弹出管理频道的Modal.</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-setting-modal &#123;&#123; channelSettingModalShow &#125;&#125;"</span> <span class="attr">hidden</span>=<span class="string">"&#123;&#123; channelSettingModalHide &#125;&#125;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-show-text"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-show-text-wrap"</span>&gt;</span>显示频道<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item"</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123; navbarShowIndexArray &#125;&#125;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-wrap"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-left"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">"channel-item-icon-minus &#123;&#123; !index || navbarShowIndexArray.length &lt; 4 ? 'visibility-hidden' : '' &#125;&#125;"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123; item &#125;&#125;.0"</span> <span class="attr">src</span>=<span class="string">"/images/index/icon_minus.png"</span> <span class="attr">catchtap</span>=<span class="string">"hideChannel"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-text"</span>&gt;</span>&#123;&#123; navbarArray[item].text &#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-up &#123;&#123; index &lt; 2 ? 'visibility-hidden' : '' &#125;&#125;"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123; item &#125;&#125;.00"</span> <span class="attr">catchtap</span>=<span class="string">"upChannel"</span>&gt;</span>上移<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-hide-text"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-hide-text-wrap"</span>&gt;</span>隐藏频道<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item"</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123; navbarHideIndexArray &#125;&#125;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-wrap"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-left"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">"channel-item-icon-plus"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123; item &#125;&#125;.0"</span> <span class="attr">src</span>=<span class="string">"/images/index/icon_plus.png"</span> <span class="attr">catchtap</span>=<span class="string">"showChannel"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-text"</span>&gt;</span>&#123;&#123; navbarArray[item].text &#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-item-up visibility-hidden"</span>&gt;</span>上移<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这个管理频道的Modal里，通过改变数组<code>navbarShowIndexArray</code>来控制频道是否显示和显示顺序，同时，需要另外一个数组<code>navbarHideIndexArray</code>来存储隐藏的频道。</p>
+<p>Modal显示的时候，Topbar需要被另一个写有“频道设置”字样的Bar覆盖。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-setting &#123;&#123; channelSettingShow &#125;&#125;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"channel-setting-text"</span>&gt;</span>频道设置<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"navbar-arrow-up"</span> <span class="attr">catchtap</span>=<span class="string">"hideChannelSettingModal"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">"navbar-arrow-icon navbar-arrow-icon-up"</span> <span class="attr">src</span>=<span class="string">"/images/index/icon_arrow_up.png"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后，我们来看逻辑层的实现。初始化的部分<code>data</code>如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">    navbarArray: [&#123;</span><br><span class="line">        text: <span class="string">'推荐'</span>,</span><br><span class="line">        type: <span class="string">'navbar-item-active'</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'热点'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'视频'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'图片'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'段子'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'社会'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'娱乐'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'科技'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'体育'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'汽车'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'财经'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        text: <span class="string">'搞笑'</span>,</span><br><span class="line">        type: <span class="string">''</span></span><br><span class="line">    &#125;],</span><br><span class="line">    navbarShowIndexArray: <span class="built_in">Array</span>.from(<span class="built_in">Array</span>(<span class="number">12</span>).keys()),</span><br><span class="line">    navbarHideIndexArray: [],</span><br><span class="line">    channelSettingShow: <span class="string">''</span>,</span><br><span class="line">    channelSettingModalShow: <span class="string">''</span>,</span><br><span class="line">    channelSettingModalHide: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>navbar-item-active</code>是一个可使频道高亮的<code>Class</code>，<code>navbarShowIndexArray</code>初始化的结果是一个0到11的数组，刚好是数组<code>navbarArray</code>的所有元素的索引。显然，初始化的结果是所有频道都将显示。</p>
+<p>为了实现频道个性化配置的保存，<code>navbarShowIndexArray</code>还需要通过小程序的数据缓存API储存起来。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">storeNavbarShowIndexArray: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    wx.setStorage(&#123;</span><br><span class="line">        key: <span class="string">'navbarShowIndexArray'</span>,</span><br><span class="line">        data: <span class="keyword">this</span>.data.navbarShowIndexArray</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>切换频道的函数如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">switchChannel: <span class="function"><span class="keyword">function</span>(<span class="params">targetChannelIndex</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.getArticles(targetChannelIndex);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> navbarArray = <span class="keyword">this</span>.data.navbarArray;</span><br><span class="line">    navbarArray.forEach(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> &#123;</span><br><span class="line">        item.type = <span class="string">''</span>;</span><br><span class="line">        <span class="keyword">if</span> (index === targetChannelIndex) &#123;</span><br><span class="line">            item.type = <span class="string">'navbar-item-active'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">        navbarArray: navbarArray,</span><br><span class="line">        currentChannelIndex: targetChannelIndex</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，频道的管理和简单切换我们就实现了。</p>
+<p>但是，到此为止，频道的切换只能通过点击对应Topbar中频道那一小块区域来实现，要是在正文区域左滑和右滑也能切换频道就好了。</p>
+<p>一个容易想到的思路是，在正文区域绑定<code>touch</code>事件，通过坐标判断滑动方向，然后使Topbar中当前频道的上一个或下一个频道高亮，同时，控制Topbar横向滚动合适的偏移长度，以确保切换后的频道能出现在视图区域。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">onTouchstartArticles: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">        <span class="string">'startTouchs.x'</span>: e.changedTouches[<span class="number">0</span>].clientX,</span><br><span class="line">        <span class="string">'startTouchs.y'</span>: e.changedTouches[<span class="number">0</span>].clientY</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;,</span><br><span class="line">onTouchendArticles: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> deltaX = e.changedTouches[<span class="number">0</span>].clientX - <span class="keyword">this</span>.data.startTouchs.x;</span><br><span class="line">    <span class="keyword">let</span> deltaY = e.changedTouches[<span class="number">0</span>].clientY - <span class="keyword">this</span>.data.startTouchs.y;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(deltaX) &gt; <span class="built_in">Math</span>.abs(deltaY) &amp;&amp; <span class="built_in">Math</span>.abs(deltaX) &gt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> deltaNavbarIndex = deltaX &gt; <span class="number">0</span> ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> currentChannelIndex = <span class="keyword">this</span>.data.currentChannelIndex;</span><br><span class="line">        <span class="keyword">let</span> navbarShowIndexArray = <span class="keyword">this</span>.data.navbarShowIndexArray;</span><br><span class="line">        <span class="keyword">let</span> targetChannelIndexOfNavbarShowIndexArray = navbarShowIndexArray.indexOf(currentChannelIndex) + deltaNavbarIndex;</span><br><span class="line">        <span class="keyword">let</span> navbarShowIndexArrayLength = navbarShowIndexArray.length;</span><br><span class="line">        <span class="keyword">if</span> (targetChannelIndexOfNavbarShowIndexArray &gt;= <span class="number">0</span> &amp;&amp; targetChannelIndexOfNavbarShowIndexArray &lt;= navbarShowIndexArrayLength - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> targetChannelIndex = navbarShowIndexArray[targetChannelIndexOfNavbarShowIndexArray];</span><br><span class="line">            <span class="keyword">if</span> (navbarShowIndexArrayLength &gt; <span class="number">6</span>) &#123;</span><br><span class="line">                <span class="keyword">let</span> scrollNavbarLeft;</span><br><span class="line">                <span class="keyword">if</span> (targetChannelIndexOfNavbarShowIndexArray &lt; <span class="number">5</span>) &#123;</span><br><span class="line">                    scrollNavbarLeft = <span class="number">0</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetChannelIndexOfNavbarShowIndexArray === navbarShowIndexArrayLength - <span class="number">1</span>) &#123;</span><br><span class="line">                    scrollNavbarLeft = <span class="keyword">this</span>.rpx2px(<span class="number">110</span> * (navbarShowIndexArrayLength - <span class="number">6</span>));</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    scrollNavbarLeft = <span class="keyword">this</span>.rpx2px(<span class="number">110</span> * (targetChannelIndexOfNavbarShowIndexArray - <span class="number">4</span>));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">                    scrollNavbarLeft: scrollNavbarLeft</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.switchChannel(targetChannelIndex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更多的技术细节，请移步<code>GitHub</code>——<a href="https://github.com/jyboy/wx-topbar" target="_blank" rel="noopener">点此前往</a>。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web前端/" rel="tag">#Web前端</a>
+          
+            <a href="/tags/小程序/" rel="tag">#小程序</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/24/Ionic-2-favicon设置无效临时解决方案/" rel="next" title="Ionic 2 favicon设置无效临时解决方案">
+                <i class="fa fa-chevron-left"></i> Ionic 2 favicon设置无效临时解决方案
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/16/编程题之原生JS实现下拉菜单/" rel="prev" title="编程题之原生JS实现下拉菜单">
+                编程题之原生JS实现下拉菜单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank">
+                  
+                    <i class="fa fa-medium"></i>
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank">
+                  
+                    <i class="fa fa-hacker-news"></i>
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          <p align='center'>WeChat ID: biebuxin</p>
+          <p align='center'>
+          <img src="/images/wechat.jpg" />
+          </p>
+        </div>
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

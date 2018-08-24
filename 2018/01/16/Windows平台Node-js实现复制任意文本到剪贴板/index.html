@@ -1,0 +1,721 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="Node.js,Windows,复制," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最新有个需求，想在Windows平台上用Node.js实现复制功能，实现过程中踩了一些坑，总结一下，做个记录。">
+<meta name="keywords" content="Node.js,Windows,复制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows平台Node.js实现复制任意文本到剪贴板">
+<meta property="og:url" content="https://biebu.xin/2018/01/16/Windows平台Node-js实现复制任意文本到剪贴板/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="最新有个需求，想在Windows平台上用Node.js实现复制功能，实现过程中踩了一些坑，总结一下，做个记录。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows平台Node.js实现复制任意文本到剪贴板">
+<meta name="twitter:description" content="最新有个需求，想在Windows平台上用Node.js实现复制功能，实现过程中踩了一些坑，总结一下，做个记录。">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2018/01/16/Windows平台Node-js实现复制任意文本到剪贴板/" />
+
+
+  <title> Windows平台Node.js实现复制任意文本到剪贴板 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Windows平台Node.js实现复制任意文本到剪贴板
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-01-16T16:33:29+08:00" content="2018-01-16">
+              2018-01-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最新有个需求，想在Windows平台上用Node.js实现复制功能，实现过程中踩了一些坑，总结一下，做个记录。</p>
+<a id="more"></a>
+<p>首先，这个需求显然很小，也不用考虑跨平台，就打算自己实现一下。Node.js本身并没有类似函数，而CMD命令，应该是有类似实现的：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo biebuxin | clip</span><br></pre></td></tr></table></figure>
+<p>Node.js代码可以这么写：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; exec &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line">exec(<span class="string">'echo biebuxin | clip'</span>);</span><br></pre></td></tr></table></figure>
+<p>预期结果应该是biebuxin这个字符串被复制到剪贴板了。粘贴后却发现，复制的不止biebuxin，后面多了一个空格和换行。</p>
+<p>不想要后面多余的空格和换行，怎么办？换一种写法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">exec(<span class="string">'clip'</span>).stdin.end(<span class="string">'biebuxin'</span>);</span><br></pre></td></tr></table></figure>
+<p>这样粘贴出来的，不多不少，就是biebuxin。</p>
+<p>你以为就结束了么？Naive…</p>
+<p>当你想要复制中文时，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">exec(<span class="string">'clip'</span>).stdin.end(<span class="string">'别不信'</span>);</span><br></pre></td></tr></table></figure>
+<p>粘贴出来，会发现是乱码！</p>
+<p>为什么会出现乱码？</p>
+<p>是编码的问题。</p>
+<p>在CMD中执行<code>chcp</code>，结果是“活动代码页: 936”。这表明，CMD默认是GBK编码。而Node.js默认是UTF-8编码——这种编码差异，对中文而言，肯定会出问题的嘛。</p>
+<p>然后尝试把编码改成GBK，却发现，Node.js并不支持GBK编码。</p>
+<p>这个时候，得借助iconv-lite这个强大的编码转换工具了，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; exec &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"><span class="keyword">const</span> iconv = <span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"></span><br><span class="line">exec(<span class="string">'clip'</span>).stdin.end(iconv.encode(<span class="string">'别不信'</span>, <span class="string">'gbk'</span>));</span><br></pre></td></tr></table></figure>
+<p>粘贴出来，完美。</p>
+<p>以上。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+            <a href="/tags/Windows/" rel="tag">#Windows</a>
+          
+            <a href="/tags/复制/" rel="tag">#复制</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/15/微信小程序「学科排名」开发心得/" rel="next" title="微信小程序「学科排名」开发心得">
+                <i class="fa fa-chevron-left"></i> 微信小程序「学科排名」开发心得
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/16/Windows平台Node-js实现文本转语音TTS/" rel="prev" title="Windows平台Node.js实现文本转语音TTS">
+                Windows平台Node.js实现文本转语音TTS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank">
+                  
+                    <i class="fa fa-medium"></i>
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank">
+                  
+                    <i class="fa fa-hacker-news"></i>
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          <p align='center'>WeChat ID: biebuxin</p>
+          <p align='center'>
+          <img src="/images/wechat.jpg" />
+          </p>
+        </div>
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

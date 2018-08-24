@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>cjkRuby Demo</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 8px;
+            height: calc(100% - 16px);
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .container {
+            height: 50%;
+            display: flex;
+            justify-content: space-between;
+        }
+        #left, .middle-wrap, #right {
+            width: 30%;
+            height: 100%;
+        }
+        .middle-wrap {
+            position: relative;
+        }
+        #middle {
+            width: 100%;
+            height: 100%;
+        }
+        #copy {
+            width: 70px;
+            height: 30px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>cjkRuby Demo</h1>
+    <div class="container">
+        <textarea autofocus placeholder="{别不信}(biebuxin)" id="left"></textarea>
+        <div class="middle-wrap">
+            <textarea placeholder="<ruby>别不信<rt>biebuxin</rt></ruby>" id="middle"></textarea>
+            <button id="copy">Copy</button>
+        </div>
+        <div id="right"><ruby>别不信<rt>biebuxin</rt></ruby></div>
+    </div>
+    <script>
+        var d = document;
+        d.getElementById('left').oninput = function(e) {
+            var html = cjkRuby(e.target.value);
+            d.getElementById('middle').value = html;
+            d.getElementById('right').innerHTML = html;
+        };
+
+        d.getElementById('copy').addEventListener('click', function(e) {
+            d.getElementById('middle').select();
+            if (d.execCommand('copy')) {
+                alert('Copied!');
+            }
+        });
+
+        function cjkRuby(str) {
+            return str.replace(/\{([^{}()]+)\}\(([^{}()]+)\)/g, function(match, $1, $2) {
+                return '<ruby>' + $1 + '<rt>' + $2 + '</rt></ruby>'
+            });
+        }
+    </script>
+</body>
+</html>

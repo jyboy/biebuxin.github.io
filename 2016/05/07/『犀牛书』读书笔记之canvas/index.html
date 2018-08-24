@@ -1,0 +1,751 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="JavaScript,犀牛书,canvas," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;lt;canvas&amp;gt;标签是HTML5中的新标签，Internet Explorer 9+, Firefox和Chrome等都支持&amp;lt;canvas&amp;gt;标签。">
+<meta name="keywords" content="JavaScript,犀牛书,canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="『犀牛书』读书笔记之canvas">
+<meta property="og:url" content="https://biebu.xin/2016/05/07/『犀牛书』读书笔记之canvas/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="&amp;lt;canvas&amp;gt;标签是HTML5中的新标签，Internet Explorer 9+, Firefox和Chrome等都支持&amp;lt;canvas&amp;gt;标签。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://biebu.xin/images/posts/canvas-1.jpg">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="『犀牛书』读书笔记之canvas">
+<meta name="twitter:description" content="&amp;lt;canvas&amp;gt;标签是HTML5中的新标签，Internet Explorer 9+, Firefox和Chrome等都支持&amp;lt;canvas&amp;gt;标签。">
+<meta name="twitter:image" content="https://biebu.xin/images/posts/canvas-1.jpg">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2016/05/07/『犀牛书』读书笔记之canvas/" />
+
+
+  <title> 『犀牛书』读书笔记之canvas | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                『犀牛书』读书笔记之canvas
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-07T13:30:45+08:00" content="2016-05-07">
+              2016-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>&lt;canvas&gt;</code>标签是HTML5中的新标签，Internet Explorer 9+, Firefox和Chrome等都支持<code>&lt;canvas&gt;</code>标签。</p>
+<a id="more"></a>
+<p><code>&lt;canvas&gt;</code>元素和SVG之间一个重要的区别是：使用<code>&lt;canvas&gt;</code>来绘制图形是通过调用它提供的方法，而使用SVG是通过构建一棵XML元素树来实现的。这两种方式可以互相模拟，但是各有优劣。比如：使用SVG来绘制图形，可以很简单地通过移除相应的元素来编辑图片。而使用<code>&lt;canvas&gt;</code>的话，要移除图片中的元素就只能先擦除当前的再重新绘制一遍。<code>&lt;canvas&gt;</code>的优势在于，它绘制的API是基于JavaScript的，并且相对比较简洁。</p>
+<h2 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h2><p>下面是一个使用画布API的简单例子，它在<code>&lt;canvas&gt;</code>元素中绘制一个红色的正方形和一个蓝色的圆。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"square"</span> <span class="attr">width</span>=<span class="string">10</span> <span class="attr">height</span>=<span class="string">10</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span> // 一个红色的正方形</span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"circle"</span> <span class="attr">width</span>=<span class="string">10</span> <span class="attr">height</span>=<span class="string">10</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span> // 一个蓝色的圆</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"square"</span>); <span class="comment">// 获取第一个画布元素</span></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>); <span class="comment">// 获取2D绘制上下文</span></span></span><br><span class="line"><span class="actionscript">	context.fillStyle = <span class="string">"#f00"</span>; <span class="comment">// 设置填充色为红</span></span></span><br><span class="line"><span class="actionscript">	context.fillRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">10</span>,<span class="number">10</span>); <span class="comment">//填充一个正方形</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">	canvas = <span class="built_in">document</span>.getElementById(<span class="string">"circle"</span>); <span class="comment">// 第二个画布元素</span></span></span><br><span class="line"><span class="actionscript">	context = canvas.getContext(<span class="string">"2d"</span>); <span class="comment">// 获取它的绘制上下文</span></span></span><br><span class="line"><span class="actionscript">	context.beginPath(); <span class="comment">// 开始一条新的路径</span></span></span><br><span class="line"><span class="javascript">	context.arc(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI, <span class="literal">true</span>); <span class="comment">//将圆形添加到该路径中</span></span></span><br><span class="line"><span class="actionscript">	context.fillStyle = <span class="string">"#00f"</span>; <span class="comment">// 设置填充色为蓝</span></span></span><br><span class="line"><span class="actionscript">	context.fill(); <span class="comment">// 填充路径</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中，调用<code>getContext()</code>方法时，传递一个”2d”参数，会获得一个<code>CanvasRenderingContext2D</code>对象，使用该对象可以在画布上绘制二维图形，这里简称其为『上下文对象』。</p>
+<p>还有，<code>arc()</code>方法创建圆或部分圆的语法是<code>context.arc(x, y, r, sAngle, eAngle, counterclockwise);</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">圆心x坐标</td>
+</tr>
+<tr>
+<td style="text-align:left">y</td>
+<td style="text-align:left">圆心y坐标</td>
+</tr>
+<tr>
+<td style="text-align:left">r</td>
+<td style="text-align:left">圆半径</td>
+</tr>
+<tr>
+<td style="text-align:left">sAngle</td>
+<td style="text-align:left">起始角，以弧度计，三点钟位置为0度</td>
+</tr>
+<tr>
+<td style="text-align:left">eAngle</td>
+<td style="text-align:left">结束角，以弧度计</td>
+</tr>
+<tr>
+<td style="text-align:left">counterclockwise</td>
+<td style="text-align:left">true为逆时针，false为顺时针</td>
+</tr>
+</tbody>
+</table>
+<h2 id="绘制线段和填充形状"><a href="#绘制线段和填充形状" class="headerlink" title="绘制线段和填充形状"></a>绘制线段和填充形状</h2><p>如下代码定义一条包含了两条线段的路径：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"my_canvas_id"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"my_canvas_id"</span>);</span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> c = canvas.getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"><span class="actionscript">	c.beginPath(); <span class="comment">// 开始一条新路径</span></span></span><br><span class="line"><span class="actionscript">	c.moveTo(<span class="number">100</span>, <span class="number">100</span>); <span class="comment">// 从(100, 100)开始定义一条新的子路径</span></span></span><br><span class="line"><span class="actionscript">	c.lineTo(<span class="number">200</span>, <span class="number">200</span>); <span class="comment">// 从(100, 100)到(200, 200)绘制一条线段</span></span></span><br><span class="line"><span class="actionscript">	c.lineTo(<span class="number">100</span>, <span class="number">200</span>); <span class="comment">// 从(200, 200)到(100, 200)绘制一条线段</span></span></span><br><span class="line"><span class="actionscript">	c.fillStyle = <span class="string">"#f00"</span>; <span class="comment">// 内部使用红色</span></span></span><br><span class="line"><span class="actionscript">	c.strokeStyle = <span class="string">"#00f"</span>; <span class="comment">// 蓝色外边框</span></span></span><br><span class="line"><span class="actionscript">	c.lineWidth = <span class="number">5</span>; <span class="comment">// 5个像素宽</span></span></span><br><span class="line"><span class="actionscript">	c.fill(); <span class="comment">// 填充一个三角形区域</span></span></span><br><span class="line"><span class="actionscript">	c.stroke(); <span class="comment">// 绘制三角形的两条边</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>渲染图形如下：</p>
+<p><img src="../../../../images/posts/canvas-1.jpg" alt="canvas绘制三角形两边和填充三角形"></p>
+<p>注意，之所以上述代码填充成了一个三角形，但是只勾勒了三角形的两条边，是因为对于这样的『未闭合』的子路径，调用<code>fill()</code>方法填充的时候，会假设子路径的终点和子路径的起点连接起来。想要勾勒出上述三角形的三条边，可以调用<code>closePath()</code>方法将子路径的起点和终点真正连接起来，当然，也可以<code>lineTo(100,100)</code>。</p>
+<h2 id="非零绕数原则"><a href="#非零绕数原则" class="headerlink" title="非零绕数原则"></a>非零绕数原则</h2><p>当单条子路径与自身相交（比如一个内部包含正方形的六边形）时，画布调用<code>fill()</code>方法填充图形时需要能够确定哪些区域在路径里面，哪些在外面。这个判断的原则称为『非零绕数原则』。</p>
+<blockquote>
+<p><strong>非零绕数原则</strong>：想象一条从点P出发没着任意方向无限延伸（或者一直延伸到路径所在的区域外某点）的射线。现在从0开始初始化一个计数器，然后对所有穿过这条射线的路径进行枚举。每当一条路径顺时针方向穿过射线的时候，计数器就加1；反之，就减1，最后枚举完所有的路径之后，如果计数器的值不是0，那么就认为P是在路径内。反之，如果计数器值是0，则认为P在路径外。</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/犀牛书/" rel="tag">#犀牛书</a>
+          
+            <a href="/tags/canvas/" rel="tag">#canvas</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/07/『犀牛书』读书笔记之脚本化图片/" rel="next" title="『犀牛书』读书笔记之脚本化图片">
+                <i class="fa fa-chevron-left"></i> 『犀牛书』读书笔记之脚本化图片
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/09/AngularJS实现从本地读取静态JSON数据/" rel="prev" title="AngularJS实现从本地读取静态JSON数据">
+                AngularJS实现从本地读取静态JSON数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank">
+                  
+                    <i class="fa fa-medium"></i>
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank">
+                  
+                    <i class="fa fa-hacker-news"></i>
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          <p align='center'>WeChat ID: biebuxin</p>
+          <p align='center'>
+          <img src="/images/wechat.jpg" />
+          </p>
+        </div>
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单例子"><span class="nav-number">1.</span> <span class="nav-text">简单例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制线段和填充形状"><span class="nav-number">2.</span> <span class="nav-text">绘制线段和填充形状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非零绕数原则"><span class="nav-number">3.</span> <span class="nav-text">非零绕数原则</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

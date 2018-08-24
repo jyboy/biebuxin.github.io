@@ -1,0 +1,15 @@
+User-agent: *
+
+Allow: /
+Allow: /safexam/
+Allow：/sjturules/
+Allow: /archives/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+Sitemap: http://biebu.xin/sitemap.xml
+Sitemap: http://biebu.xin/baidusitemap.xml
