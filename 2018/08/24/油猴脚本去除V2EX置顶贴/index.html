@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。">
+<meta name="description" content="V2EX部分频道有置顶的广告贴，广告拦截扩展uBlock Origin也不起作用，只好自己动手解决了。">
 <meta name="keywords" content="JavaScript,Tampermonkey,V2EX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="油猴脚本去除V2EX置顶贴">
 <meta property="og:url" content="https://biebu.xin/2018/08/24/油猴脚本去除V2EX置顶贴/index.html">
 <meta property="og:site_name" content="别不信">
-<meta property="og:description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。">
+<meta property="og:description" content="V2EX部分频道有置顶的广告贴，广告拦截扩展uBlock Origin也不起作用，只好自己动手解决了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-24T07:59:44.191Z">
+<meta property="og:updated_time" content="2018-08-24T08:04:09.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="油猴脚本去除V2EX置顶贴">
-<meta name="twitter:description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。">
+<meta name="twitter:description" content="V2EX部分频道有置顶的广告贴，广告拦截扩展uBlock Origin也不起作用，只好自己动手解决了。">
 
 
 
@@ -334,7 +334,7 @@
       
 
       
-        <p>V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。</p>
+        <p>V2EX部分频道有置顶的广告贴，广告拦截扩展uBlock Origin也不起作用，只好自己动手解决了。</p>
 <a id="more"></a>
 <p>Chrome检查，置顶帖和正常贴的元素如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inner"</span> <span class="attr">id</span>=<span class="string">"Tabs"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell"</span> <span class="attr">id</span>=<span class="string">"SecondaryTabs"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 置顶帖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">"background-image: url('/static/img/corner_star.png'); background-repeat: no-repeat; background-size: 20px 20px; background-position: right top;"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">"background-image: url('/static/img/corner_star.png'); background-repeat: no-repeat; background-size: 20px 20px; background-position: right top;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 正常帖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">""</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">""</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
