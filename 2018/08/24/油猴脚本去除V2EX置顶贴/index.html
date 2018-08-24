@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，就自己动手分析了一下。">
+<meta name="description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。">
 <meta name="keywords" content="JavaScript,Tampermonkey,V2EX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="油猴脚本去除V2EX置顶贴">
 <meta property="og:url" content="https://biebu.xin/2018/08/24/油猴脚本去除V2EX置顶贴/index.html">
 <meta property="og:site_name" content="别不信">
-<meta property="og:description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，就自己动手分析了一下。">
+<meta property="og:description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-24T07:02:32.259Z">
+<meta property="og:updated_time" content="2018-08-24T07:59:44.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="油猴脚本去除V2EX置顶贴">
-<meta name="twitter:description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，就自己动手分析了一下。">
+<meta name="twitter:description" content="V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。">
 
 
 
@@ -334,11 +334,11 @@
       
 
       
-        <p>V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，就自己动手分析了一下。</p>
+        <p>V2EX部分频道有置顶的广告贴，去广告扩展uBlock Origin也不起作用，只好自己动手解决了。</p>
 <a id="more"></a>
 <p>Chrome检查，置顶帖和正常贴的元素如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inner"</span> <span class="attr">id</span>=<span class="string">"Tabs"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell"</span> <span class="attr">id</span>=<span class="string">"SecondaryTabs"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 置顶帖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">"background-image: url('/static/img/corner_star.png'); background-repeat: no-repeat; background-size: 20px 20px; background-position: right top;"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">"background-image: url('/static/img/corner_star.png'); background-repeat: no-repeat; background-size: 20px 20px; background-position: right top;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 正常帖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">""</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cell item"</span> <span class="attr">style</span>=<span class="string">""</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>可以看出，站长很『聪明』，置顶帖对应的元素没有便于识别的<code>class</code>等特征，怪不得uBlock Origin等去广告扩展无能为力。</p>
+<p>可以看出，站长很『聪明』，置顶帖对应的元素没有便于识别的<code>class</code>等特征，怪不得uBlock Origin等广告拦截扩展无能为力。</p>
 <p>用JavaScript脚本的话，思路很明确，因为置顶帖和背景有关的<code>style</code>取值显然和正常的不一样，很容易搞定：</p>
 <script src="//gist.github.com/3e814c92d6b445c5772c5461672a00c6.js?file=v2ex.tampermonkey.js"></script>
 <p>把脚本添加到Tampermonkey（油猴）中，保存后就立即生效了。</p>
@@ -383,6 +383,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/24/油猴脚本去除沪江小D各种广告/" rel="prev" title="油猴脚本去除沪江小D各种广告">
+                油猴脚本去除沪江小D各种广告 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -454,7 +458,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -471,7 +475,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

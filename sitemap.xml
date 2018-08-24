@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://biebu.xin/2018/08/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E5%8E%BB%E9%99%A4%E6%B2%AA%E6%B1%9F%E5%B0%8FD%E5%90%84%E7%A7%8D%E5%B9%BF%E5%91%8A/</loc>
+    
+    <lastmod>2018-08-24T08:01:02.876Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://biebu.xin/2018/08/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E5%8E%BB%E9%99%A4V2EX%E7%BD%AE%E9%A1%B6%E8%B4%B4/</loc>
     
-    <lastmod>2018-08-24T07:02:32.259Z</lastmod>
+    <lastmod>2018-08-24T07:59:44.191Z</lastmod>
     
   </url>
   
@@ -44,13 +51,6 @@
   </url>
   
   <url>
-    <loc>https://biebu.xin/categories/index.html</loc>
-    
-    <lastmod>2018-08-24T04:04:01.434Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://biebu.xin/demo/2017-03-16-js-overlay.html</loc>
     
     <lastmod>2018-08-24T04:04:01.434Z</lastmod>
@@ -58,7 +58,14 @@
   </url>
   
   <url>
-    <loc>https://biebu.xin/2018/01/16/Windows%E5%B9%B3%E5%8F%B0Node-js%E5%AE%9E%E7%8E%B0%E5%A4%8D%E5%88%B6%E4%BB%BB%E6%84%8F%E6%96%87%E6%9C%AC%E5%88%B0%E5%89%AA%E8%B4%B4%E6%9D%BF/</loc>
+    <loc>https://biebu.xin/categories/index.html</loc>
+    
+    <lastmod>2018-08-24T04:04:01.434Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://biebu.xin/about/index.html</loc>
     
     <lastmod>2018-08-24T04:04:01.433Z</lastmod>
     
@@ -72,7 +79,7 @@
   </url>
   
   <url>
-    <loc>https://biebu.xin/about/index.html</loc>
+    <loc>https://biebu.xin/2018/01/16/Windows%E5%B9%B3%E5%8F%B0Node-js%E5%AE%9E%E7%8E%B0%E5%A4%8D%E5%88%B6%E4%BB%BB%E6%84%8F%E6%96%87%E6%9C%AC%E5%88%B0%E5%89%AA%E8%B4%B4%E6%9D%BF/</loc>
     
     <lastmod>2018-08-24T04:04:01.433Z</lastmod>
     
@@ -128,14 +135,14 @@
   </url>
   
   <url>
-    <loc>https://biebu.xin/2017/03/07/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AE%9E%E7%8E%B0%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1App%E9%82%A3%E6%A0%B7%E7%9A%84Topbar/</loc>
+    <loc>https://biebu.xin/2017/02/24/Ionic-2-favicon%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%95%88%E4%B8%B4%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
     
     <lastmod>2018-08-24T04:04:01.431Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://biebu.xin/2017/02/24/Ionic-2-favicon%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%95%88%E4%B8%B4%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    <loc>https://biebu.xin/2017/03/07/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AE%9E%E7%8E%B0%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1App%E9%82%A3%E6%A0%B7%E7%9A%84Topbar/</loc>
     
     <lastmod>2018-08-24T04:04:01.431Z</lastmod>
     
