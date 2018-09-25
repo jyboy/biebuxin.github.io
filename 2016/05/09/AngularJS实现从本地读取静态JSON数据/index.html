@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="Ionic,AngularJS,JSON," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近有个功能需求，需要在Ionic框架下实现手机从本地加载JSON配置文件。AngularJS有个$http服务,可以实现读取远程服务器的数据。自己稍加改动，将其用于读取本地的JSON数据。">
+<meta name="keywords" content="Ionic,AngularJS,JSON">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS实现从本地读取静态JSON数据">
+<meta property="og:url" content="https://biebu.xin/2016/05/09/AngularJS实现从本地读取静态JSON数据/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="最近有个功能需求，需要在Ionic框架下实现手机从本地加载JSON配置文件。AngularJS有个$http服务,可以实现读取远程服务器的数据。自己稍加改动，将其用于读取本地的JSON数据。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS实现从本地读取静态JSON数据">
+<meta name="twitter:description" content="最近有个功能需求，需要在Ionic框架下实现手机从本地加载JSON配置文件。AngularJS有个$http服务,可以实现读取远程服务器的数据。自己稍加改动，将其用于读取本地的JSON数据。">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2016/05/09/AngularJS实现从本地读取静态JSON数据/" />
+
+
+  <title> AngularJS实现从本地读取静态JSON数据 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AngularJS实现从本地读取静态JSON数据
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-09T14:06:15+08:00" content="2016-05-09">
+              2016-05-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近有个功能需求，需要在Ionic框架下实现手机从本地加载JSON配置文件。AngularJS有个<code>$http</code>服务,可以实现读取远程服务器的数据。自己稍加改动，将其用于读取本地的JSON数据。</p>
+<a id="more"></a>
+<h2 id="从-http说起"><a href="#从-http说起" class="headerlink" title="从$http说起"></a>从$http说起</h2><p>关于<code>$http</code>，<a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank" rel="noopener">官方文档</a>有一个严谨的说法：</p>
+<blockquote>
+<p>The $http service is a core Angular service that facilitates communication with the remote HTTP servers via the browser’s XMLHttpRequest object or via JSONP.</p>
+</blockquote>
+<p>这里出现了<code>JSONP</code>，那它和<code>JSON</code>有关系么？我们知道<code>Java</code>和<code>JavaScript</code>的关系就跟雷锋与雷峰塔的关系一样，但是，<code>JSONP</code>，全称<code>JSON with Padding</code>，是<code>JSON</code>的一种『使用模式』，显然和<code>JSON</code>的关系很密切。</p>
+<p><code>$http</code>有一些快捷方法，其中一个是<code>$http.get(url)</code>，它的语法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$http.get(<span class="string">'/someUrl'</span>, config).then(successCallback, errorCallback);</span><br></pre></td></tr></table></figure>
+<p>为了实现需要的功能，本地需要有JSON文件。在Cmd窗口中输入<code>ionic start your-app-name blank</code>回车，新建Ionic空白项目后，可在<code>your-app-name\www\js\</code>下新建<code>data\data.json</code>,写入如下一段数据：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"records"</span>: [&#123;</span><br><span class="line">		<span class="attr">"Name"</span>: <span class="string">"Alfreds Futterkiste"</span>,</span><br><span class="line">		<span class="attr">"City"</span>: <span class="string">"Berlin"</span>,</span><br><span class="line">		<span class="attr">"Country"</span>: <span class="string">"Germany"</span></span><br><span class="line">	&#125;, &#123;</span><br><span class="line">		<span class="attr">"Name"</span>: <span class="string">"Berglunds snabbköp"</span>,</span><br><span class="line">		<span class="attr">"City"</span>: <span class="string">"Luleå"</span>,</span><br><span class="line">		<span class="attr">"Country"</span>: <span class="string">"Sweden"</span></span><br><span class="line">	&#125;, &#123;</span><br><span class="line">		<span class="attr">"Name"</span>: <span class="string">"biebu.xin"</span>,</span><br><span class="line">		<span class="attr">"City"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">		<span class="attr">"Country"</span>: <span class="string">"China"</span></span><br><span class="line">	&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里顺手推荐一个网站<a href="http://jsonlint.com/" target="_blank" rel="noopener">JSONLint</a>，可以在线校验和格式化JSON，方便好用。</p>
+<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><p>在<code>your-app-name\www\js\controllers.js</code>中写入：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">angular.module(<span class="string">'starter.controllers'</span>, [])</span><br><span class="line">.controller(<span class="string">'httpCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> url = <span class="string">""</span>;</span><br><span class="line">	<span class="keyword">if</span>(ionic.Platform.isAndroid())&#123;</span><br><span class="line">		url = <span class="string">"/android_asset/www/"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    $http.get(url+<span class="string">"js/data/data.json"</span>)</span><br><span class="line">    .success(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;$scope.names = response.records;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里先判断系统平台是否为安卓，如果是，相对路径则为<code>/android_asset/www/</code>，如果是IOS，url只需指向<code>/www/</code>文件夹即可。</p>
+<p><code>$http.get(url)</code>从<code>/android_asset/www/js/data/data.json</code>中顺利读取出静态JSON数据，注意$scope.names为数组类型。</p>
+<p>注意将控制器模块添加到<code>your-app-name\www\js\app.js</code>的<code>angular.module</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">angular.module(<span class="string">'starter'</span>, [<span class="string">'ionic'</span>, <span class="string">'starter.controllers'</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>先在<code>your-app-name\www\index.html</code>中链接<code>controllers.js</code>：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/controllers.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再在<code>&lt;ion-content&gt;&lt;/ion-content&gt;</code>标签内写入：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"httpCtrl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"x in names"</span>&gt;</span></span><br><span class="line">            &#123;&#123; x.Name + ', ' + x.Country &#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>ng-controller</code>指令定义了AngularJS控制器，这里对应<code>controllers.js</code>中的<code>httpCtrl</code>。<br><code>ng-repeat</code>指令用在数组<code>names</code>上,会重复一个HTML元素。因为在控制器中已经添加<code>$scope</code>对象了，视图(HTML)可以获取属性<code>names</code>。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>先输入<code>cd your-app-name</code>回车，进入到Ionic项目根目录下。再输入<code>ionic platform add android</code>回车，添加安卓平台。然后就可以通过<code>ionic serve</code>在浏览器（强烈建议Chrome）中或者通过<code>ionic run android</code>在安卓手机中看到本地JSON数据被读取并打印到屏幕的效果了。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ionic/" rel="tag">#Ionic</a>
+          
+            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
+          
+            <a href="/tags/JSON/" rel="tag">#JSON</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/07/『犀牛书』读书笔记之canvas/" rel="next" title="『犀牛书』读书笔记之canvas">
+                <i class="fa fa-chevron-left"></i> 『犀牛书』读书笔记之canvas
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/12/AngularJS和HTML5 FileSystem配合读取本地文本文件/" rel="prev" title="AngularJS和HTML5 FileSystem配合读取本地文本文件">
+                AngularJS和HTML5 FileSystem配合读取本地文本文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank" title="Jianshu">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//www.jianshu.com/favicon.ico" alt="Jianshu" />
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank" title="Juejin">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//juejin.im/favicon.ico" alt="Juejin" />
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            <p style="text-align: center;">WeChat ID 👉🏻biebuxin👈🏻</p>
+            <p style="text-align: center;">
+              <img src="/images/wechat.jpg" alt="剪影Boy wechat" />
+            </p>
+          </div>
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从-http说起"><span class="nav-number">1.</span> <span class="nav-text">从$http说起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制器"><span class="nav-number">2.</span> <span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">3.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

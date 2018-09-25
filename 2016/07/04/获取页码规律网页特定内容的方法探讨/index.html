@@ -1,0 +1,727 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="jQuery,爬虫,Node.js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近发现一个网站，比较简单，也挺有意思。自己花了一些时间，对其源代码进行了分析，并尝试多种方法进行特定内容的抓取。">
+<meta name="keywords" content="jQuery,爬虫,Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="获取页码规律网页特定内容的方法探讨">
+<meta property="og:url" content="https://biebu.xin/2016/07/04/获取页码规律网页特定内容的方法探讨/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="最近发现一个网站，比较简单，也挺有意思。自己花了一些时间，对其源代码进行了分析，并尝试多种方法进行特定内容的抓取。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.428Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="获取页码规律网页特定内容的方法探讨">
+<meta name="twitter:description" content="最近发现一个网站，比较简单，也挺有意思。自己花了一些时间，对其源代码进行了分析，并尝试多种方法进行特定内容的抓取。">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2016/07/04/获取页码规律网页特定内容的方法探讨/" />
+
+
+  <title> 获取页码规律网页特定内容的方法探讨 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                获取页码规律网页特定内容的方法探讨
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-07-04T13:10:14+08:00" content="2016-07-04">
+              2016-07-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近发现一个网站，比较简单，也挺有意思。自己花了一些时间，对其源代码进行了分析，并尝试多种方法进行特定内容的抓取。</p>
+<a id="more"></a>
+<h2 id="源代码分析"><a href="#源代码分析" class="headerlink" title="源代码分析"></a>源代码分析</h2><p>在Chrome中对这个网站的一个网页进行『检查』，发现关键部分如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>1、烘箱（干燥箱）在加热时，门可以开启。<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"xuanxiang_panduan"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_1"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">id</span>=<span class="string">"ti_1_1"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_1_1"</span>&gt;</span>对<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_1"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">id</span>=<span class="string">"ti_1_0"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_1_0"</span>&gt;</span>错<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>（标准答案： 错误 ）<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>2、电源插座、接线板、电线的容量应满足电器功率的需要。<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"xuanxiang_panduan"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_2"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">id</span>=<span class="string">"ti_2_1"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_2_1"</span>&gt;</span>对<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_2"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">id</span>=<span class="string">"ti_2_0"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_2_0"</span>&gt;</span>错<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>（标准答案： 正确 ）<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>3、为避免线路负荷过大，而引起火灾，功率1000瓦以上的设备不得共用一个接线板。<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"xuanxiang_panduan"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_3"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">id</span>=<span class="string">"ti_3_1"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_3_1"</span>&gt;</span>对<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_3"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">id</span>=<span class="string">"ti_3_0"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_3_0"</span>&gt;</span>错<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>（标准答案： 正确 ）<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>4、对于触电事故，应立即切断电源或用有绝缘性能的木棍棒挑开和隔绝电流，如果触电者的衣服干燥，又没有紧缠住身上，可以用一只手抓住他的衣服，拉离带电体；但救护人不得接触触电者的皮肤，也不能抓他的鞋。<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"xuanxiang_panduan"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_4"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">id</span>=<span class="string">"ti_4_1"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_4_1"</span>&gt;</span>对<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_4"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">id</span>=<span class="string">"ti_4_0"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_4_0"</span>&gt;</span>错<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>（标准答案： 正确 ）<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>7、实验室内的电线、开关、灯头、插头、插座等一切电器用具，要经常检查是否完好，有无漏电、潮湿、霉烂等情况。一旦有问题应立即报修。 <span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"xuanxiang_panduan"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_7"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">id</span>=<span class="string">"ti_7_1"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_7_1"</span>&gt;</span>对<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"ti_7"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">id</span>=<span class="string">"ti_7_0"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"ti_7_0"</span>&gt;</span>错<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>（标准答案： 正确 ）<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，试题和答案部分的DOM节点特征非常明显，单页获取并不难。</p>
+<h2 id="jQuery实现单页获取"><a href="#jQuery实现单页获取" class="headerlink" title="jQuery实现单页获取"></a>jQuery实现单页获取</h2><p>在Chrome的Console中写入下面一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">script.src = <span class="string">"https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"</span>;</span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> test = <span class="string">""</span>;</span><br><span class="line">	$(<span class="string">"div.test"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		test = test + $(<span class="keyword">this</span>).children(<span class="string">"h3"</span>).text() + <span class="string">"\n"</span> + $(<span class="keyword">this</span>).next(<span class="string">"span"</span>).text() + <span class="string">"\n"</span>;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="built_in">console</span>.log(test);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>代码的思路是先引入jQuery库，1s后用jQuery函数操作DOM节点。打印结果如下：</p>
+<figure class="highlight lsl"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、烘箱（干燥箱）在加热时，门可以开启。</span><br><span class="line">（标准答案：					  错误					）</span><br><span class="line"><span class="number">2</span>、电源插座、接线板、电线的容量应满足电器功率的需要。</span><br><span class="line">（标准答案：					  正确					）</span><br><span class="line"><span class="number">3</span>、为避免线路负荷过大，而引起火灾，功率<span class="number">1000</span>瓦以上的设备不得共用一个接线板。</span><br><span class="line">（标准答案：					  正确					）</span><br><span class="line"><span class="number">4</span>、对于触电事故，应立即切断电源或用有绝缘性能的木棍棒挑开和隔绝电流，如果触电者的衣服干燥，又没有紧缠住身上，可以用一只手抓住他的衣服，拉离带电体；但救护人不得接触触电者的皮肤，也不能抓他的鞋。</span><br><span class="line">（标准答案：					  正确					）</span><br><span class="line"><span class="number">7</span>、实验室内的电线、开关、灯头、插头、插座等一切电器用具，要经常检查是否完好，有无漏电、潮湿、霉烂等情况。一旦有问题应立即报修。</span><br><span class="line">（标准答案：					  正确					）</span><br></pre></td></tr></table></figure>
+<h2 id="Node-js实现多页获取"><a href="#Node-js实现多页获取" class="headerlink" title="Node.js实现多页获取"></a>Node.js实现多页获取</h2><p>出于某种明显的意图，网页的设计者将几百道题目分成100多页，每页只有5道题。而一换页，页面刷新，上面的代码就不行了。</p>
+<p>这里尝试使用<code>Node.js</code>，Node.js本身的强大和方便无需多说。在服务器端解析HTML代码，可以采用<a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="noopener">cheerio</a>，官方对其有这样的描述：</p>
+<blockquote>
+<p>Fast, flexible &amp; lean implementation of core jQuery designed specifically for the server.</p>
+</blockquote>
+<p>我们先从简单的来，用这种方法先实现单页的，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> iconv = <span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">"http://biebu.xin"</span>; <span class="comment">// 实际使用换成真正的链接</span></span><br><span class="line">http.get(url, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    res.setEncoding(<span class="string">'binary'</span>);</span><br><span class="line">    <span class="keyword">var</span> source = <span class="string">""</span>;</span><br><span class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        source += data;</span><br><span class="line">    &#125;);</span><br><span class="line">    res.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer(source, <span class="string">'binary'</span>);</span><br><span class="line">        <span class="keyword">var</span> str = iconv.decode(buf, <span class="string">'GBK'</span>);</span><br><span class="line">        <span class="comment">// console.log(str);</span></span><br><span class="line">        <span class="keyword">var</span> $ = cheerio.load(str);</span><br><span class="line">        <span class="keyword">var</span> test = <span class="string">""</span>;</span><br><span class="line">        $(<span class="string">'div.test'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            test = test + $(<span class="keyword">this</span>).children(<span class="string">'h3'</span>).text() + <span class="string">"\n"</span> + $(<span class="keyword">this</span>).next(<span class="string">'span'</span>).text() + <span class="string">"\n"</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">console</span>.log(test);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"获取数据出现错误"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/ashtuchkin/iconv-lite" target="_blank" rel="noopener">iconv-lite</a>是负责字符编码转换的，运行前注意将调用的模块先<code>npm install</code>一下，运行结果如下：</p>
+<figure class="highlight lsl"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、烘箱（干燥箱）在加热时，门可以开启。</span><br><span class="line">（标准答案：                                      错误                                  ）</span><br><span class="line"><span class="number">2</span>、电源插座、接线板、电线的容量应满足电器功率的需要。</span><br><span class="line">（标准答案：                                      正确                                  ）</span><br><span class="line"><span class="number">3</span>、为避免线路负荷过大，而引起火灾，功率<span class="number">1000</span>瓦以上的设备不得共用一个接线板。</span><br><span class="line">（标准答案：                                      正确                                  ）</span><br><span class="line"><span class="number">4</span>、对于触电事故，应立即切断电源或用有绝缘性能的木棍棒挑开和隔绝电流，如果触电者的衣服干燥，又没有紧缠住身上，可以用一只手抓住他的衣服，拉离带电体；但救护人不得</span><br><span class="line">接触触电者的皮肤，也不能抓他的鞋。</span><br><span class="line">（标准答案：                                      正确                                  ）</span><br><span class="line"><span class="number">7</span>、实验室内的电线、开关、灯头、插头、插座等一切电器用具，要经常检查是否完好，有无漏电、潮湿、霉烂等情况。一旦有问题应立即报修。</span><br><span class="line">（标准答案：                                      正确                                  ）</span><br></pre></td></tr></table></figure>
+<p>如果想获取多页的，比如3页，并将结果保存到txt文件中，可以这样：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> iconv = <span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> urls = [];</span><br><span class="line"><span class="keyword">var</span> pageNum = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=pageNum; i++) &#123;</span><br><span class="line">    urls.push(<span class="string">'http://biebu.xin'</span>+i); <span class="comment">// 实际使用换成真正的链接</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> test = <span class="string">""</span>;</span><br><span class="line">urls.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">    http.get(url, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        res.setEncoding(<span class="string">'binary'</span>);</span><br><span class="line">        <span class="keyword">var</span> source = <span class="string">""</span>;</span><br><span class="line">        res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            source += data;</span><br><span class="line">        &#125;);</span><br><span class="line">        res.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer(source, <span class="string">'binary'</span>);</span><br><span class="line">            <span class="keyword">var</span> str = iconv.decode(buf, <span class="string">'GBK'</span>);</span><br><span class="line">            <span class="comment">// console.log(str);</span></span><br><span class="line">            <span class="keyword">var</span> $ = cheerio.load(str);</span><br><span class="line">            $(<span class="string">'div.test'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                test = test + $(<span class="keyword">this</span>).children(<span class="string">'h3'</span>).text() + <span class="string">"\n"</span> + $(<span class="keyword">this</span>).next(<span class="string">'span'</span>).text() + <span class="string">"\n"</span>;</span><br><span class="line">            &#125;);</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">if</span>(count==pageNum) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(test);</span><br><span class="line">                fs.writeFile(<span class="string">'test.txt'</span>, test,  <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">                   &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;).on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"获取数据出现错误"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上述代码只考虑了是非题这么一种情况，对单选题没有考虑，并且输出结果比较『粗糙』。修改后的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> iconv = <span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> urls = [];</span><br><span class="line"><span class="keyword">var</span> startPageNum = <span class="number">1</span>; <span class="comment">// 设置起始页码，默认为1</span></span><br><span class="line"><span class="keyword">var</span> pageNum = <span class="number">3</span>; <span class="comment">// 设置页码总数</span></span><br><span class="line"><span class="keyword">for</span>(i=startPageNum; i&lt;=<span class="number">-1</span>+startPageNum+pageNum; i++) &#123;</span><br><span class="line">    urls.push(<span class="string">'http://biebu.xin'</span>+i); <span class="comment">// 实际使用换成真正的链接</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> html = <span class="string">""</span>;</span><br><span class="line">urls.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">    http.get(url, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        res.setEncoding(<span class="string">'binary'</span>);</span><br><span class="line">        <span class="keyword">var</span> source = <span class="string">""</span>;</span><br><span class="line">        res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            source += data;</span><br><span class="line">        &#125;);</span><br><span class="line">        res.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer(source, <span class="string">'binary'</span>);</span><br><span class="line">            <span class="keyword">var</span> str = iconv.decode(buf, <span class="string">'GBK'</span>);</span><br><span class="line">            <span class="comment">// console.log(str);</span></span><br><span class="line">            <span class="keyword">var</span> $ = cheerio.load(str);</span><br><span class="line">            $(<span class="string">'div.test'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> title = $(<span class="keyword">this</span>).children(<span class="string">'h3'</span>).text();</span><br><span class="line">                <span class="keyword">var</span> titlestart = title.indexOf(<span class="string">'、'</span>);</span><br><span class="line">                title = title.substring(titlestart + <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>($(<span class="keyword">this</span>).children(<span class="string">'ul'</span>).hasClass(<span class="string">'xuanxiang_panduan'</span>)) &#123;</span><br><span class="line">                    <span class="keyword">var</span> answer = $(<span class="keyword">this</span>).next(<span class="string">'span'</span>).text().substring(<span class="number">13</span>,<span class="number">15</span>);</span><br><span class="line">                    html += <span class="string">"&lt;p&gt;(是非题 )"</span> + title + <span class="string">"\n\t\t&lt;br /&gt;正确答案是 "</span> + answer +<span class="string">"\n\t\t&lt;br /&gt;&lt;strong&gt;提示&lt;/strong&gt;：请注意选项是否被调换  ——别不信biebu.xin\n&lt;/p&gt;\n"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>($(<span class="keyword">this</span>).children(<span class="string">'ul'</span>).hasClass(<span class="string">'xuanxiang_xuanze'</span>)) &#123;</span><br><span class="line">                    <span class="keyword">var</span> options = <span class="string">""</span></span><br><span class="line">                    $(<span class="keyword">this</span>).children(<span class="string">'ul'</span>).children(<span class="string">'li'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                        options += <span class="string">"\t\t&lt;br /&gt;"</span> + $(<span class="keyword">this</span>).children(<span class="string">'label'</span>).text() + <span class="string">"\n"</span>;</span><br><span class="line">                    &#125;);</span><br><span class="line">                    <span class="keyword">var</span> answer = $(<span class="keyword">this</span>).next(<span class="string">'span'</span>).text().substring(<span class="number">13</span>,<span class="number">14</span>);</span><br><span class="line">                    html += <span class="string">"&lt;p&gt;(单选题 )"</span> + title + <span class="string">"\n"</span> + options + <span class="string">"\t\t&lt;br /&gt;正确答案是 "</span> + answer +<span class="string">"\n\t\t&lt;br /&gt;&lt;strong&gt;提示&lt;/strong&gt;：请注意选项是否被调换  ——别不信biebu.xin\n&lt;/p&gt;\n"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">if</span>(count==pageNum) &#123;</span><br><span class="line">                <span class="comment">// 设置输出文件名称</span></span><br><span class="line">                fs.writeFile(<span class="string">'test.txt'</span>, html,  <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">                   &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;).on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"获取数据出现错误"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>最后，声明一下，仅供学习交流哦。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jQuery/" rel="tag">#jQuery</a>
+          
+            <a href="/tags/爬虫/" rel="tag">#爬虫</a>
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/22/在Ionic中实现获取给定路径下所有文件的名称/" rel="next" title="在Ionic中实现获取给定路径下所有文件的名称">
+                <i class="fa fa-chevron-left"></i> 在Ionic中实现获取给定路径下所有文件的名称
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/07/获取BBS十大热门话题方法探讨/" rel="prev" title="获取BBS十大热门话题方法探讨">
+                获取BBS十大热门话题方法探讨 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank" title="Jianshu">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//www.jianshu.com/favicon.ico" alt="Jianshu" />
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank" title="Juejin">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//juejin.im/favicon.ico" alt="Juejin" />
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            <p style="text-align: center;">WeChat ID 👉🏻biebuxin👈🏻</p>
+            <p style="text-align: center;">
+              <img src="/images/wechat.jpg" alt="剪影Boy wechat" />
+            </p>
+          </div>
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码分析"><span class="nav-number">1.</span> <span class="nav-text">源代码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery实现单页获取"><span class="nav-number">2.</span> <span class="nav-text">jQuery实现单页获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-js实现多页获取"><span class="nav-number">3.</span> <span class="nav-text">Node.js实现多页获取</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

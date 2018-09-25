@@ -1,0 +1,753 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="Web前端,Node.js,小程序,WeSJTU,我交,SQLite," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前两天，腾讯释放了微信小程序公测的消息，和很多开发者一样，我也非常兴奋。十一期间没什么事，就试着写了一个微信小程序WeSJTU，现在，终于可以在手机微信上跑起来了（以前是在电脑的微信开发者工具上模拟的）。">
+<meta name="keywords" content="Web前端,Node.js,小程序,WeSJTU,我交,SQLite">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序WeSJTU开发心得">
+<meta property="og:url" content="https://biebu.xin/2016/11/05/微信小程序WeSJTU开发心得/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="前两天，腾讯释放了微信小程序公测的消息，和很多开发者一样，我也非常兴奋。十一期间没什么事，就试着写了一个微信小程序WeSJTU，现在，终于可以在手机微信上跑起来了（以前是在电脑的微信开发者工具上模拟的）。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://biebu.xin/images/posts/wesjtu-1.jpg">
+<meta property="og:image" content="https://biebu.xin/images/posts/wesjtu-2.jpg">
+<meta property="og:image" content="https://biebu.xin/images/posts/wesjtu-3.jpg">
+<meta property="og:image" content="https://biebu.xin/images/posts/wesjtu-4.jpg">
+<meta property="og:image" content="https://biebu.xin/images/posts/wesjtu-5.jpg">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序WeSJTU开发心得">
+<meta name="twitter:description" content="前两天，腾讯释放了微信小程序公测的消息，和很多开发者一样，我也非常兴奋。十一期间没什么事，就试着写了一个微信小程序WeSJTU，现在，终于可以在手机微信上跑起来了（以前是在电脑的微信开发者工具上模拟的）。">
+<meta name="twitter:image" content="https://biebu.xin/images/posts/wesjtu-1.jpg">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2016/11/05/微信小程序WeSJTU开发心得/" />
+
+
+  <title> 微信小程序WeSJTU开发心得 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微信小程序WeSJTU开发心得
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-05T22:12:35+08:00" content="2016-11-05">
+              2016-11-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">小程序</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前两天，腾讯释放了微信小程序公测的消息，和很多开发者一样，我也非常兴奋。十一期间没什么事，就试着写了一个微信小程序<code>WeSJTU</code>，现在，终于可以在手机微信上跑起来了（以前是在电脑的微信开发者工具上模拟的）。</p>
+<a id="more"></a>
+<h2 id="构思"><a href="#构思" class="headerlink" title="构思"></a>构思</h2><p>微信小程序的文档，比较难的部分，如数据绑定，其思想和<code>AngularJS</code>是非常相近的，而所谓的<code>WXSS</code>，基本上可以认为是<code>CSS</code>，只是不方便用<code>SCSS</code>了——WXSS原则上不支持级联，所以整个文档看下来基本上就能上手了。</p>
+<p>先从简单有意思的开始吧，所以我设想了三个<code>Tab</code>：</p>
+<ul>
+<li><strong>同去</strong>。<a href="https://tongqu.me/" target="_blank" rel="noopener">同去网</a>是交大活动发布的主要阵地，它有很完善的API，可以通过GET请求返回活动列表、活动详情的JSON数据，另外还支持分页。</li>
+<li><strong>2048</strong>. 根据别人写的<a href="https://github.com/jeffche/wechat-app-2048" target="_blank" rel="noopener">数字2048</a>，打算改成文字2048——<strong>苟利国家生死以，岂因祸福避趋之</strong>，蛤蛤…</li>
+<li><strong>反馈</strong>。这一部分，想做一个简单的反馈功能，用户可以在小程序里反馈，我可以在网页上查看反馈内容列表。</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="同去"><a href="#同去" class="headerlink" title="同去"></a>同去</h3><p>活动列表页面，前端可以用小程序的列表渲染很方便地实现。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">scroll-view</span> <span class="attr">class</span>=<span class="string">"acts-list"</span> <span class="attr">scroll-y</span>=<span class="string">"true"</span> <span class="attr">bindscrolltolower</span>=<span class="string">"lower"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;actsList&#125;&#125;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"act-item"</span> <span class="attr">index</span>=<span class="string">"&#123;&#123;index&#125;&#125;"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123;item.actid&#125;&#125;"</span> <span class="attr">catchtap</span>=<span class="string">"redictDetail"</span>&gt;</span></span><br><span class="line">            ...</span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"load-more"</span> <span class="attr">hidden</span>=<span class="string">"&#123;&#123;moreHidden&#125;&#125;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"load-content"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"weui-loading"</span>&gt;</span><span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"loading-text"</span>&gt;</span>玩命加载中<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scroll-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>小程序的<code>wx.request</code>发起的是HTTPS请求，在后端用<code>Node.js</code>将请求转发一下。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> tqUrl = <span class="string">'https://tongqu.me'</span>;</span><br><span class="line"><span class="keyword">const</span> defaultPosterArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>];</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/acts'</span>, (req, res, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> query = url.parse(req.url, <span class="literal">true</span>).query;</span><br><span class="line">    <span class="keyword">let</span> offset = query.offset;</span><br><span class="line">    <span class="keyword">let</span> order = query.order;</span><br><span class="line">    <span class="keyword">let</span> indexUrl = <span class="string">`<span class="subst">$&#123;tqUrl&#125;</span>/index.php/api/act/type?type=0&amp;offset=<span class="subst">$&#123;offset&#125;</span>&amp;order=<span class="subst">$&#123;order&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">let</span> options = url.parse(indexUrl);</span><br><span class="line">    options.headers = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'javascript'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    https.get(options, (response) =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> source = <span class="string">""</span>;</span><br><span class="line">        response.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">            source += data;</span><br><span class="line">        &#125;);</span><br><span class="line">        response.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">            source = <span class="built_in">JSON</span>.parse(source);</span><br><span class="line">            <span class="keyword">let</span> actsList = [];</span><br><span class="line">            <span class="keyword">let</span> acts = source.result.acts;</span><br><span class="line">            <span class="keyword">let</span> actsLength = acts.length;</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; actsLength; i++) &#123;</span><br><span class="line">                <span class="keyword">let</span> poster = acts[i].poster;</span><br><span class="line">                <span class="keyword">let</span> status = acts[i].time_status_str;</span><br><span class="line">                <span class="keyword">let</span> status_style = <span class="string">''</span>;</span><br><span class="line">                <span class="keyword">if</span> (!poster) &#123;</span><br><span class="line">                    poster = <span class="string">`<span class="subst">$&#123;tqUrl&#125;</span>/images/act_default_poster/<span class="subst">$&#123;defaultPosterArray[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*defaultPosterArray.length)]&#125;</span>.jpg`</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (status == <span class="string">"人数已满"</span>) &#123;</span><br><span class="line">                    status_style = <span class="string">"act-status-full"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (status == <span class="string">"未开始报名"</span>) &#123;</span><br><span class="line">                    status_style = <span class="string">"act-status-todo"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (status == <span class="string">"报名已结束"</span>) &#123;</span><br><span class="line">                    status_style = <span class="string">"act-status-done"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">let</span> act = &#123;</span><br><span class="line">                    actid: acts[i].actid,</span><br><span class="line">                    poster: poster,</span><br><span class="line">                    name: acts[i].name,</span><br><span class="line">                    status: status,</span><br><span class="line">                    status_style: status_style,</span><br><span class="line">                    time: acts[i].start_time.substr(<span class="number">5</span>) + <span class="string">" ~ "</span> + acts[i].end_time.substr(<span class="number">5</span>),</span><br><span class="line">                    location: acts[i].location,</span><br><span class="line">                    source: acts[i].source,</span><br><span class="line">                    views: acts[i].view_count,</span><br><span class="line">                    members: acts[i].member_count</span><br><span class="line">                &#125;;</span><br><span class="line">                actsList.push(act);</span><br><span class="line">            &#125;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                actsList: actsList</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>活动详情页面，由于活动内容有文字有图片，所以列表渲染的思路是——文字就渲染文字，图片就渲染图片。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">scroll-view</span> <span class="attr">class</span>=<span class="string">"act-contents"</span> <span class="attr">scroll-y</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;actContents&#125;&#125;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">"&#123;&#123;item.textIf || item.imageIf&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"act-paragraph"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:if</span>=<span class="string">"&#123;&#123;item.textIf&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"act-text"</span>&gt;</span>&#123;&#123;item.text&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">"&#123;&#123;item.imageIf&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"image-center"</span>&gt;</span><span class="tag">&lt;<span class="name">image</span> <span class="attr">mode</span>=<span class="string">"aspectFit"</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;item.image&#125;&#125;"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123;item.image&#125;&#125;"</span> <span class="attr">catchtap</span>=<span class="string">"previewImg"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"act-end"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"act-end-line"</span>&gt;</span><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"act-end-line-wrap"</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"act-end-text"</span>&gt;</span>完<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"act-end-line"</span>&gt;</span><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"act-end-line-wrap"</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scroll-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>为了配合前端，后端需要做好数据的处理。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">'/act'</span>, (req, res, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> query = url.parse(req.url, <span class="literal">true</span>).query;</span><br><span class="line">    <span class="keyword">let</span> id = query.id;</span><br><span class="line">    <span class="keyword">let</span> indexUrl = <span class="string">`<span class="subst">$&#123;tqUrl&#125;</span>/index.php/api/act/detail?id=<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">let</span> options = url.parse(indexUrl);</span><br><span class="line">    options.headers = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'javascript'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    https.get(options, (response) =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> source = <span class="string">""</span>;</span><br><span class="line">        response.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">            source += data;</span><br><span class="line">        &#125;);</span><br><span class="line">        response.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">            source = <span class="built_in">JSON</span>.parse(source);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> main_info = source.main_info;</span><br><span class="line">            <span class="keyword">let</span> poster = main_info.photolink;</span><br><span class="line">            <span class="keyword">let</span> status = main_info.time_status_str;</span><br><span class="line">            <span class="keyword">let</span> status_style = <span class="string">''</span>;</span><br><span class="line">            <span class="keyword">if</span> (!poster) &#123;</span><br><span class="line">                poster = <span class="string">`<span class="subst">$&#123;tqUrl&#125;</span>/images/act_default_poster/<span class="subst">$&#123;defaultPosterArray[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*defaultPosterArray.length)]&#125;</span>.jpg`</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (status == <span class="string">"人数已满"</span>) &#123;</span><br><span class="line">                status_style = <span class="string">"act-status-full"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (status == <span class="string">"未开始报名"</span>) &#123;</span><br><span class="line">                status_style = <span class="string">"act-status-todo"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (status == <span class="string">"报名已结束"</span>) &#123;</span><br><span class="line">                status_style = <span class="string">"act-status-done"</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> actContents = [];</span><br><span class="line">            <span class="keyword">let</span> images = [];</span><br><span class="line">            <span class="keyword">let</span> $ = cheerio.load(source.body);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ($(<span class="string">"p"</span>).length) &#123;</span><br><span class="line">                $(<span class="string">"p"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">let</span> text = $(<span class="keyword">this</span>).text().trim();</span><br><span class="line">                    <span class="keyword">let</span> textIf = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">if</span> (!text) &#123;</span><br><span class="line">                        textIf = <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">let</span> $img = $(<span class="keyword">this</span>).children(<span class="string">"img"</span>);</span><br><span class="line">                    <span class="keyword">let</span> imageIf = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">let</span> image = <span class="string">""</span>;</span><br><span class="line">                    <span class="keyword">if</span> ($img.length) &#123;</span><br><span class="line">                        imageIf = <span class="literal">true</span>;</span><br><span class="line">                        image = $img.attr(<span class="string">"src"</span>).replace(<span class="regexp">/^https?:\/\/(www.)?tongqu.me/</span>, tqUrl);</span><br><span class="line">                        images.push(image);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (textIf || imageIf) &#123;</span><br><span class="line">                        <span class="keyword">let</span> actContent = &#123;</span><br><span class="line">                            text: text,</span><br><span class="line">                            textIf: textIf,</span><br><span class="line">                            image: image,</span><br><span class="line">                            imageIf: imageIf</span><br><span class="line">                        &#125;;</span><br><span class="line">                        actContents.push(actContent);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> actContent = &#123;</span><br><span class="line">                    text: $.text().trim(),</span><br><span class="line">                    textIf: <span class="literal">true</span>,</span><br><span class="line">                    image: <span class="string">""</span>,</span><br><span class="line">                    imageIf: <span class="literal">false</span></span><br><span class="line">                &#125;;</span><br><span class="line">                actContents.push(actContent);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> actDetail = &#123;</span><br><span class="line">                poster: poster,</span><br><span class="line">                name: main_info.name,</span><br><span class="line">                status: status,</span><br><span class="line">                status_style: status_style,</span><br><span class="line">                time: main_info.start_time.substr(<span class="number">5</span>) + <span class="string">" ~ "</span> + main_info.end_time.substr(<span class="number">5</span>),</span><br><span class="line">                location: main_info.location,</span><br><span class="line">                source: main_info.source,</span><br><span class="line">                actContents: actContents,</span><br><span class="line">                images: images</span><br><span class="line">            &#125;;</span><br><span class="line">            res.send(actDetail);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2048"><a href="#2048" class="headerlink" title="2048"></a>2048</h3><p>2048，代码的思路还是比较清晰的——通过触摸动作返回的坐标值判断手指滑动方向，然后移动合并，判断输赢，随机插入等。其中，数字转文字的代码是通过循环实现的，简单粗暴。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">number2word: <span class="function">(<span class="params">arr</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> numbersArray = [<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>, <span class="number">256</span>, <span class="number">512</span>, <span class="number">1024</span>, <span class="number">2048</span>, <span class="number">4096</span>, <span class="number">8192</span>, <span class="number">16384</span>];</span><br><span class="line">    <span class="keyword">let</span> wordsArray = [<span class="string">'他'</span>, <span class="string">'苟'</span>, <span class="string">'利'</span>, <span class="string">'国'</span>, <span class="string">'家'</span>, <span class="string">'生'</span>, <span class="string">'死'</span>, <span class="string">'以'</span>, <span class="string">'岂'</span>, <span class="string">'因'</span>, <span class="string">'祸'</span>, <span class="string">'福'</span>, <span class="string">'避'</span>, <span class="string">'趋'</span>, <span class="string">'之'</span>];</span><br><span class="line">    <span class="keyword">let</span> wordnumbers = arr;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">let</span> index = numbersArray.indexOf(wordnumbers[i][j].number);</span><br><span class="line">            wordnumbers[i][j].word = wordsArray[index];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> wordnumbers;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用模态框提醒游戏结束。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modal</span> <span class="attr">class</span>=<span class="string">"modal"</span> <span class="attr">confirm-text</span>=<span class="string">"吼啊"</span> <span class="attr">cancel-text</span>=<span class="string">"不吼"</span> <span class="attr">hidden</span>=<span class="string">"&#123;&#123;failHidden&#125;&#125;"</span> <span class="attr">bindconfirm</span>=<span class="string">"modalConfirm"</span> <span class="attr">bindcancel</span>=<span class="string">"modalCancle"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span>&gt;</span>图样图森破！<span class="tag">&lt;/<span class="name">view</span>&gt;</span><span class="tag">&lt;<span class="name">view</span>&gt;</span>重新开始，吼不吼啊？<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modal</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">modal</span> <span class="attr">class</span>=<span class="string">"modal"</span> <span class="attr">confirm-text</span>=<span class="string">"吼啊"</span> <span class="attr">cancel-text</span>=<span class="string">"不吼"</span> <span class="attr">hidden</span>=<span class="string">"&#123;&#123;successHidden&#125;&#125;"</span> <span class="attr">bindconfirm</span>=<span class="string">"modalConfirm"</span> <span class="attr">bindcancel</span>=<span class="string">"modalCancle"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span>&gt;</span>比一般人不知高到哪里去！<span class="tag">&lt;/<span class="name">view</span>&gt;</span><span class="tag">&lt;<span class="name">view</span>&gt;</span>再来一次，吼不吼啊？<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modal</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>感觉膜得也太暴力了…</p>
+<h3 id="反馈"><a href="#反馈" class="headerlink" title="反馈"></a>反馈</h3><p>前端是一个表单，反馈内容由用户输入，反馈者的基本信息由小程序的<code>wx.getUserInfo</code>获得。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"feedback-form"</span> <span class="attr">bindsubmit</span>=<span class="string">"formSubmit"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"feedback-form-wrapper"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"feedback-title"</span>&gt;</span>期待您的反馈<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"input-wrapper"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"feedback-input &#123;&#123;inputStyle&#125;&#125;"</span> <span class="attr">name</span>=<span class="string">"feedback"</span> <span class="attr">placeholder</span>=<span class="string">"建议或吐槽..."</span> <span class="attr">bindfocus</span>=<span class="string">"inputFocus"</span> <span class="attr">bindblur</span>=<span class="string">"inputBlur"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"btn-wrapper"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"feedback-btn"</span> <span class="attr">formType</span>=<span class="string">"submit"</span> <span class="attr">type</span>=<span class="string">"primary"</span> <span class="attr">plain</span>=<span class="string">"true"</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>后端将前端通过POST请求提交的表单数据写入到<code>SQLite</code>中。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.post(<span class="string">'/feedback'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> nickname = req.body.nickname;</span><br><span class="line">    <span class="keyword">let</span> gender = req.body.gender;</span><br><span class="line">    <span class="keyword">let</span> content = req.body.content;</span><br><span class="line">    <span class="keyword">if</span> (gender == <span class="number">1</span>) &#123;</span><br><span class="line">        gender = <span class="string">"男"</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (gender == <span class="number">2</span>) &#123;</span><br><span class="line">        gender = <span class="string">"女"</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        gender = <span class="string">"未知"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    db.run(<span class="string">"INSERT INTO feedback (time, nickname, gender, content) VALUES ($time, $nickname, $gender, $content)"</span>, &#123;</span><br><span class="line">        $time: moment().format(<span class="string">'MM-DD HH:mm'</span>),</span><br><span class="line">        $nickname: nickname,</span><br><span class="line">        $gender: gender,</span><br><span class="line">        $content: content</span><br><span class="line">    &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> data = <span class="string">"success"</span>;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            data = <span class="string">"fail"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        res.send(data);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>然后，通过网页就可以很方便地查看了。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"feedback"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"feedback-wrap"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"feedback-title"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>反馈列表<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"feedback-table"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">th</span> <span class="attr">class</span>=<span class="string">"col1"</span>&gt;</span>时间<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">th</span> <span class="attr">class</span>=<span class="string">"col2"</span>&gt;</span>昵称<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">th</span> <span class="attr">class</span>=<span class="string">"col3"</span>&gt;</span>性别<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">th</span> <span class="attr">class</span>=<span class="string">"col4"</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">                &lt;% let i = 0; feedbackList.forEach(function(item) &#123; if (i &lt; 5) &#123; %&gt;&lt;tr&gt;</span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"col1td"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">item.time</span> %&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"col2td"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">item.nickname</span> %&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"col3td"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">item.gender</span> %&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"col4td"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">item.content</span> %&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">i</span>++; &#125;) %&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><strong>同去</strong></p>
+<p><img src="../../../../images/posts/wesjtu-1.jpg" alt="同去"></p>
+<p><img src="../../../../images/posts/wesjtu-2.jpg" alt="活动详情"></p>
+<p><strong>2048</strong></p>
+<p><img src="../../../../images/posts/wesjtu-3.jpg" alt="2048-入口"></p>
+<p><img src="../../../../images/posts/wesjtu-4.jpg" alt="2048"></p>
+<p><strong>反馈</strong></p>
+<p><img src="../../../../images/posts/wesjtu-5.jpg" alt="关于"></p>
+<p>小程序WeSJTU的前端代码已经在<code>GitHub</code>上开源了——<a href="https://github.com/jyboy/miniapp-wesjtu" target="_blank" rel="noopener">点此前往</a>，欢迎学习交流。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web前端/" rel="tag">#Web前端</a>
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+            <a href="/tags/小程序/" rel="tag">#小程序</a>
+          
+            <a href="/tags/WeSJTU/" rel="tag">#WeSJTU</a>
+          
+            <a href="/tags/我交/" rel="tag">#我交</a>
+          
+            <a href="/tags/SQLite/" rel="tag">#SQLite</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/16/获取贴吧热贴方法探讨/" rel="next" title="获取贴吧热贴方法探讨">
+                <i class="fa fa-chevron-left"></i> 获取贴吧热贴方法探讨
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/02/Chrome扩展『智慧驾培助手』开发心得/" rel="prev" title="Chrome扩展『智慧驾培助手』开发心得">
+                Chrome扩展『智慧驾培助手』开发心得 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank" title="Jianshu">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//www.jianshu.com/favicon.ico" alt="Jianshu" />
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank" title="Juejin">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//juejin.im/favicon.ico" alt="Juejin" />
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            <p style="text-align: center;">WeChat ID 👉🏻biebuxin👈🏻</p>
+            <p style="text-align: center;">
+              <img src="/images/wechat.jpg" alt="剪影Boy wechat" />
+            </p>
+          </div>
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#构思"><span class="nav-number">1.</span> <span class="nav-text">构思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同去"><span class="nav-number">2.1.</span> <span class="nav-text">同去</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2048"><span class="nav-number">2.2.</span> <span class="nav-text">2048</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反馈"><span class="nav-number">2.3.</span> <span class="nav-text">反馈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果"><span class="nav-number">3.</span> <span class="nav-text">效果</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

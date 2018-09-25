@@ -1,0 +1,733 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="Web前端,JavaScript,jQuery," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="安全教育考试题库子页面嵌入博客后，就想着通过前端脚本准确快速地查找和定位，这里有个很好的案例，就是12306的车站订票起售时间查找的页面效果。 所以我要做的功能就是：在搜索框输入题目关键字段后，点击Enter按钮或按Enter键，可以迅速将页面滚动定位到第一个匹配的位置，将关键字高亮，并可以继续匹配下去，同时保持搜索框和按钮在页面顶部，方便继续查找。">
+<meta name="keywords" content="Web前端,JavaScript,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery实现页面查找以索引题库">
+<meta property="og:url" content="https://biebu.xin/2016/05/04/jQuery实现页面查找以索引题库/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="安全教育考试题库子页面嵌入博客后，就想着通过前端脚本准确快速地查找和定位，这里有个很好的案例，就是12306的车站订票起售时间查找的页面效果。 所以我要做的功能就是：在搜索框输入题目关键字段后，点击Enter按钮或按Enter键，可以迅速将页面滚动定位到第一个匹配的位置，将关键字高亮，并可以继续匹配下去，同时保持搜索框和按钮在页面顶部，方便继续查找。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery实现页面查找以索引题库">
+<meta name="twitter:description" content="安全教育考试题库子页面嵌入博客后，就想着通过前端脚本准确快速地查找和定位，这里有个很好的案例，就是12306的车站订票起售时间查找的页面效果。 所以我要做的功能就是：在搜索框输入题目关键字段后，点击Enter按钮或按Enter键，可以迅速将页面滚动定位到第一个匹配的位置，将关键字高亮，并可以继续匹配下去，同时保持搜索框和按钮在页面顶部，方便继续查找。">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2016/05/04/jQuery实现页面查找以索引题库/" />
+
+
+  <title> jQuery实现页面查找以索引题库 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                jQuery实现页面查找以索引题库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-04T14:20:11+08:00" content="2016-05-04">
+              2016-05-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web前端/" itemprop="url" rel="index">
+                    <span itemprop="name">Web前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>安全教育考试题库子页面嵌入博客后，就想着通过前端脚本准确快速地查找和定位，这里有个很好的案例，就是12306的<a href="https://kyfw.12306.cn/otn/gonggao/announcement_eig.html" target="_blank" rel="noopener">车站订票起售时间查找</a>的页面效果。</p>
+<p>所以我要做的功能就是：在搜索框输入题目关键字段后，点击<code>Enter</code>按钮或按<code>Enter</code>键，可以迅速将页面滚动定位到第一个匹配的位置，将关键字<font color="red">高亮</font>，并可以继续匹配下去，同时保持搜索框和按钮在页面顶部，方便继续查找。</p>
+<a id="more"></a>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><p>主要呈现一个搜索区域<code>#searchBox</code>，包含一个输入框，用来输入要查找的关键字段，以及一个<code>Enter</code>按钮，然后就是前言、使用说明和题库<code>#content</code>。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"searchBox"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"textbox"</span> <span class="attr">id</span>=<span class="string">"searchStr"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">size</span>=<span class="string">"30"</span> <span class="attr">name</span>=<span class="string">"searchStr"</span> <span class="attr">placeholder</span>=<span class="string">"请输入关键字段"</span> /&gt;</span>　</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"searchbtn"</span> <span class="attr">id</span>=<span class="string">"searchBtn"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Enter"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>前言<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>使用说明<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>题库<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>简单对页面内容进行了CSS设置，其中<code>.highlight</code>用来设置查找结果高亮显示的样式效果。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">33px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.highlight</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#searchBox</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: .<span class="number">8</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: right;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#searchStr</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#searchBtn</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#0f79be</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h3><p>首先，实现一个固定搜索框和按钮的效果，当页面往下拉滚动时，输入框和按钮始终保持在页面的顶部。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span><br><span class="line">    $.fn.fixDiv = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> defaultVal = &#123;</span><br><span class="line">			top: <span class="number">10</span></span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> obj = $.extend(defaultVal, options);</span><br><span class="line">		$<span class="keyword">this</span> = <span class="keyword">this</span>;</span><br><span class="line">		<span class="keyword">var</span> _top = $<span class="keyword">this</span>.offset().top;</span><br><span class="line">		<span class="keyword">var</span> _left = $<span class="keyword">this</span>.offset().left;</span><br><span class="line"></span><br><span class="line">		$(<span class="built_in">window</span>).scroll(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">var</span> _currentTop = $<span class="keyword">this</span>.offset().top;</span><br><span class="line">			<span class="keyword">var</span> _scrollTop = $(<span class="built_in">document</span>).scrollTop();</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (_scrollTop &gt; _top) &#123;</span><br><span class="line">				$<span class="keyword">this</span>.offset(&#123;</span><br><span class="line">					top: _scrollTop + obj.top,</span><br><span class="line">					left: _left</span><br><span class="line">				&#125;);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				$<span class="keyword">this</span>.offset(&#123;</span><br><span class="line">					top: _top,</span><br><span class="line">					left: _left</span><br><span class="line">				&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> $<span class="keyword">this</span>;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;)(jQuery);</span><br></pre></td></tr></table></figure>
+<p>然后，调用<code>fixDiv()</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	$(<span class="string">"#searchBox"</span>).fixDiv(&#123;</span><br><span class="line">        top: <span class="number">0</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>接着，当输入关键字段后，点击<code>Enter</code>按钮或按<code>Enter</code>键，调用函数<code>highlight()</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	$(<span class="string">'#searchBtn'</span>).click(highlight);</span><br><span class="line"></span><br><span class="line">	$(<span class="string">'#searchStr'</span>).keydown(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    	<span class="keyword">var</span> key = e.which;</span><br><span class="line">    	<span class="keyword">if</span> (key == <span class="number">13</span>) highlight();</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>函数<code>highlight()</code>定义：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">highlight</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    clearSelection(); <span class="comment">// 清空上次高亮显示的内容</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> flag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> bStart = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> searchText = $(<span class="string">'#searchStr'</span>).val();</span><br><span class="line">    <span class="keyword">var</span> _searchTop = $(<span class="string">'#searchStr'</span>).offset().top + <span class="number">30</span>;</span><br><span class="line">    <span class="keyword">var</span> _searchLeft = $(<span class="string">'#searchStr'</span>).offset().left;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ($.trim(searchText) === <span class="string">""</span>) &#123;</span><br><span class="line">        showTips(<span class="string">"请粘贴文本后再查找"</span>, _searchTop, <span class="number">3</span>, _searchLeft); <span class="comment">// 提示信息</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找匹配</span></span><br><span class="line">    <span class="keyword">var</span> regExp = <span class="keyword">new</span> <span class="built_in">RegExp</span>(searchText, <span class="string">'g'</span>);</span><br><span class="line">    <span class="keyword">var</span> content = $(<span class="string">"#content"</span>).text();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!regExp.test(content)) &#123;</span><br><span class="line">        showTips(<span class="string">"呀，这道题没有啊，在底部吐槽一下吧"</span>, _searchTop, <span class="number">3</span>, _searchLeft); <span class="comment">// 提示信息</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sCurText != searchText) &#123;</span><br><span class="line">            i = <span class="number">0</span>;</span><br><span class="line">            sCurText = searchText;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 高亮显示</span></span><br><span class="line">    $(<span class="string">'p'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> html = $(<span class="keyword">this</span>).html();</span><br><span class="line">        <span class="keyword">var</span> newHtml = html.replace(regExp, <span class="string">'&lt;span class="highlight"&gt;'</span> + searchText + <span class="string">'&lt;/span&gt;'</span>);</span><br><span class="line"></span><br><span class="line">        $(<span class="keyword">this</span>).html(newHtml);</span><br><span class="line">        flag = <span class="number">1</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定位</span></span><br><span class="line">    <span class="keyword">if</span> (flag == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($(<span class="string">".highlight"</span>).size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> _top = $(<span class="string">".highlight"</span>).eq(i).offset().top + $(<span class="string">".highlight"</span>).eq(i).height();</span><br><span class="line">            $(<span class="string">"#searchBtn"</span>).val(<span class="string">"查找下一个"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> _top = $(<span class="string">".highlight"</span>).offset().top + $(<span class="string">".highlight"</span>).height();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $(<span class="string">"html, body"</span>).animate(&#123; <span class="attr">scrollTop</span>: _top - <span class="number">50</span> &#125;);</span><br><span class="line">        i++;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt; $(<span class="string">".highlight"</span>).size() - <span class="number">1</span>) &#123;</span><br><span class="line">            i = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码中的函数<code>clearSelection()</code>定义如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clearSelection</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	$(<span class="string">'p'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		$(<span class="keyword">this</span>).find(<span class="string">'.highlight'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			$(<span class="keyword">this</span>).replaceWith($(<span class="keyword">this</span>).html());</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有函数<code>showTips()</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tipsDiv = <span class="string">'&lt;div class="tipsClass"&gt;&lt;/div&gt;'</span>;</span><br><span class="line">$(<span class="string">'body'</span>).append(tipsDiv);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showTips</span>(<span class="params">tips, height, time, left</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> windowWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">	$(<span class="string">'.tipsClass'</span>).text(tips);</span><br><span class="line"></span><br><span class="line">	$( <span class="string">'div.tipsClass'</span> ).css(&#123;</span><br><span class="line">		<span class="string">'top'</span>: height + <span class="string">'px'</span>,</span><br><span class="line">		<span class="string">'left'</span>: left + <span class="string">'px'</span>,</span><br><span class="line">		<span class="string">'position'</span>: <span class="string">'absolute'</span>,</span><br><span class="line">		<span class="string">'padding'</span>: <span class="string">'8px 6px'</span>,</span><br><span class="line">		<span class="string">'background'</span>: <span class="string">'#000'</span>,</span><br><span class="line">		<span class="string">'font-size'</span>: <span class="string">'14px'</span>,</span><br><span class="line">		<span class="string">'font-weight'</span>: <span class="string">'900'</span>,</span><br><span class="line">		<span class="string">'margin'</span>: <span class="string">'0 auto'</span>,</span><br><span class="line">		<span class="string">'text-align'</span>: <span class="string">'center'</span>,</span><br><span class="line">		<span class="string">'width'</span>: <span class="string">'auto'</span>,</span><br><span class="line">		<span class="string">'color'</span>: <span class="string">'#fff'</span>,</span><br><span class="line">		<span class="string">'border-radius'</span>: <span class="string">'2px'</span>,</span><br><span class="line">		<span class="string">'opacity'</span>: <span class="string">'.8'</span>,</span><br><span class="line">		<span class="string">'box-shadow'</span>: <span class="string">'0 0 10px #000'</span></span><br><span class="line">	&#125;).show();</span><br><span class="line"></span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $(<span class="string">'div.tipsClass'</span>).fadeOut();</span><br><span class="line">    &#125;, (time * <span class="number">1000</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到这里就基本完成了。</p>
+<h2 id="jQuery引用报错"><a href="#jQuery引用报错" class="headerlink" title="jQuery引用报错"></a>jQuery引用报错</h2><p>编译、部署后，Chrome浏览器调试报错：</p>
+<figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">index</span>):<span class="number">7695</span> Uncaught TypeError: $(...).fixDiv <span class="keyword">is</span> <span class="keyword">not</span> a <span class="function"><span class="keyword">function</span></span></span><br><span class="line"><span class="function">	<span class="params">(anonymous <span class="keyword">function</span>)</span> @ <span class="params">(<span class="keyword">index</span>)</span>:</span><span class="number">7695</span></span><br></pre></td></tr></table></figure>
+<p>我百思不得其解，因为在这之前我已引入了jQuery。后来在<a href="http://stackoverflow.com/questions/4207405/jquery-fn-is-saying-not-a-function" target="_blank" rel="noopener">Stack Overflow</a>找到了问题所在：</p>
+<blockquote>
+<p>@sholsinger: Check that you’re not loading jQuery into the page twice. Some plugins or plugin libraries like to include jQuery. So it can overwrite your existing jQuery instance and override the $ and jQuery variables with a new – fresh – instance causing existing plugins to be undefined. Plugins are added to the prototype of jQuery when they are defined. So if you destroy the only instance of that object, then the prototype is reset to its original form. And therefore those plugins are no longer part of that prototype.</p>
+</blockquote>
+<p>简单来说就是在上述代码后又加载了一遍jQuery，我一看，果然是，后一个是Hexo编译时引入的，即</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/vendors/jquery/index.js?v=2.1.3"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>只需要将其注释掉即可。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web前端/" rel="tag">#Web前端</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/jQuery/" rel="tag">#jQuery</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/04/搭建安全教育考试题库的历程/" rel="next" title="搭建安全教育考试题库的历程">
+                <i class="fa fa-chevron-left"></i> 搭建安全教育考试题库的历程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/07/『犀牛书』读书笔记之脚本化图片/" rel="prev" title="『犀牛书』读书笔记之脚本化图片">
+                『犀牛书』读书笔记之脚本化图片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank" title="Jianshu">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//www.jianshu.com/favicon.ico" alt="Jianshu" />
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank" title="Juejin">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//juejin.im/favicon.ico" alt="Juejin" />
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            <p style="text-align: center;">WeChat ID 👉🏻biebuxin👈🏻</p>
+            <p style="text-align: center;">
+              <img src="/images/wechat.jpg" alt="剪影Boy wechat" />
+            </p>
+          </div>
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键代码"><span class="nav-number">1.</span> <span class="nav-text">关键代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">1.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS"><span class="nav-number">1.2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery"><span class="nav-number">1.3.</span> <span class="nav-text">jQuery</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery引用报错"><span class="nav-number">2.</span> <span class="nav-text">jQuery引用报错</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="JavaScript,犀牛书,图片," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="《JavaScript权威指南》一书俗称『犀牛书』，是一本厚厚的经典巨著，堪称JavaScript界的『圣经』。第一次读这本书由于懒怠，并没有读得很深入，这次由于项目需要，我对书中关于图片编程的部分又进行了研读，并整理成本篇读书笔记。">
+<meta name="keywords" content="JavaScript,犀牛书,图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="『犀牛书』读书笔记之脚本化图片">
+<meta property="og:url" content="https://biebu.xin/2016/05/07/『犀牛书』读书笔记之脚本化图片/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="《JavaScript权威指南》一书俗称『犀牛书』，是一本厚厚的经典巨著，堪称JavaScript界的『圣经』。第一次读这本书由于懒怠，并没有读得很深入，这次由于项目需要，我对书中关于图片编程的部分又进行了研读，并整理成本篇读书笔记。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="『犀牛书』读书笔记之脚本化图片">
+<meta name="twitter:description" content="《JavaScript权威指南》一书俗称『犀牛书』，是一本厚厚的经典巨著，堪称JavaScript界的『圣经』。第一次读这本书由于懒怠，并没有读得很深入，这次由于项目需要，我对书中关于图片编程的部分又进行了研读，并整理成本篇读书笔记。">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2016/05/07/『犀牛书』读书笔记之脚本化图片/" />
+
+
+  <title> 『犀牛书』读书笔记之脚本化图片 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                『犀牛书』读书笔记之脚本化图片
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-07T02:03:40+08:00" content="2016-05-07">
+              2016-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>《JavaScript权威指南》一书俗称『犀牛书』，是一本厚厚的经典巨著，堪称JavaScript界的『圣经』。第一次读这本书由于懒怠，并没有读得很深入，这次由于项目需要，我对书中关于图片编程的部分又进行了研读，并整理成本篇读书笔记。</p>
+<a id="more"></a>
+<h2 id="替换图片"><a href="#替换图片" class="headerlink" title="替换图片"></a>替换图片</h2><p>Web页面使用HTML的<code>&lt;img&gt;</code>元素来嵌入图片，可以设置元素的src属性，将其指向一个新的URL使浏览器载入并展示一张新的图片。</p>
+<p>这样可以实现在HTML文档中动态替换图片，比如下面一个实现图片翻转简单的例子：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"avatar.png"</span> <span class="attr">onmouseover</span>=<span class="string">"this.src='avatar_rollover.png'"</span> <span class="attr">onmouseout</span>=<span class="string">"this.src='avatar.png'"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当鼠标指针经过或离开<code>&lt;img&gt;</code>元素时，事件处理程序会重新设置其src属性。</p>
+<h2 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h2><p>为了实现较高的响应度，需要想办法来确保图片的预加载，让浏览器缓存起来。为了强制让图片缓存起来，可以先用<code>Image()</code>构造函数来创建一个屏幕外图像对象，然后，对其src属性设置成我们期望的URL。<br>因为图片元素并没有添加到文档中，所以，它不可见，但是浏览器还是会加载图片并将其缓存。之后，当设置成相同的URL来显示图片时，它会很快从浏览器换从中加载。于是，上面的代码可以修改成下面这样：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	(<span class="keyword">new</span> Image()).src=<span class="string">"avatar_rollover.png"</span>;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"avatar.png"</span> <span class="attr">onmouseover</span>=<span class="string">"this.src='avatar_rollover.png'"</span> <span class="attr">onmouseout</span>=<span class="string">"this.src='avatar.png'"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="优雅化"><a href="#优雅化" class="headerlink" title="优雅化"></a>优雅化</h2><p>那我们想在任意的<code>&lt;img&gt;</code>元素上，只要简单指定一个属性（比如<code>data-rollover</code>），就会创建一个图片翻转的效果，可以怎么做呢？看下面一段代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"avatar.png"</span> <span class="attr">data-rollover</span>=<span class="string">"avatar_rollover.png"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="comment">// 注册函数f，当文档载入完成时执行函数f</span></span></span><br><span class="line"><span class="actionscript">	<span class="function"><span class="keyword">function</span> <span class="title">onLoad</span><span class="params">(f)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">	    <span class="keyword">if</span> (onLoad.loaded)   <span class="comment">//如果文档已经载入完成</span></span></span><br><span class="line"><span class="javascript">	        <span class="built_in">window</span>.setTimeout(f,<span class="number">0</span>); <span class="comment">//将f放入异步队列，并尽快执行它</span></span></span><br><span class="line"><span class="javascript">	    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.addEventListener) <span class="comment">//注册事件</span></span></span><br><span class="line"><span class="javascript">	        <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>,f,<span class="literal">false</span>);</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="comment">// 给onload设置一个标志，用来指示文档时候加载完成</span></span></span><br><span class="line"><span class="actionscript">	onLoad.loaded = <span class="literal">false</span>;</span></span><br><span class="line"><span class="actionscript">	<span class="comment">// 注册一个函数，当文档载入完成时设置这个标志</span></span></span><br><span class="line"><span class="actionscript">	onLoad(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">	    onLoad.loaded = <span class="literal">true</span>;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	onLoad(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">		<span class="comment">// 遍历所有图片，查找data-rollover属性</span></span></span><br><span class="line"><span class="javascript">		<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">document</span>.images.length; i++) &#123;</span></span><br><span class="line"><span class="javascript">			<span class="keyword">var</span> img = <span class="built_in">document</span>.images[i];</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> rollover = img.getAttribute(<span class="string">"data-rollover"</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">			<span class="keyword">if</span> (!rollover) <span class="keyword">continue</span>; <span class="comment">// 跳过没有data-rollover属性的图片</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">			<span class="comment">// 将翻转的图片缓存</span></span></span><br><span class="line"><span class="actionscript">			(<span class="keyword">new</span> Image()).src = rollover;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">			<span class="comment">// 定义一个属性来标识原图片的URL</span></span></span><br><span class="line"><span class="actionscript">			img.setAttribute(<span class="string">"data-rollout"</span>, img.src);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">			<span class="comment">// 注册事件处理函数来实现翻转效果</span></span></span><br><span class="line"><span class="actionscript">			img.onmouseover = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">				<span class="keyword">this</span>.src = <span class="keyword">this</span>.getAttribute(<span class="string">"data-rollover"</span>);</span></span><br><span class="line"><span class="undefined">			&#125;;</span></span><br><span class="line"><span class="actionscript">			img.onmouseout = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">				<span class="keyword">this</span>.src = <span class="keyword">this</span>.getAttribute(<span class="string">"data-rollout"</span>);</span></span><br><span class="line"><span class="undefined">			&#125;;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样代码是不是一下子高大上了，确实『优雅』了很多。</p>
+<h2 id="堆栈溢出"><a href="#堆栈溢出" class="headerlink" title="堆栈溢出"></a>堆栈溢出</h2><p>我在练习的时候，无意中将指示文档加载完成标志的那部分代码写在<code>function onLoad(f) { ... }</code>里面了，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onLoad</span>(<span class="params">f</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (onLoad.loaded)</span><br><span class="line">        <span class="built_in">window</span>.setTimeout(f,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.addEventListener)</span><br><span class="line">        <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>,f,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    onLoad.loaded = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    onLoad(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        onLoad.loaded = <span class="literal">true</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，Chrome就报错了：</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">Uncaught RangeError: Maximum <span class="keyword">call</span> stack <span class="built_in">size</span> exceeded</span><br></pre></td></tr></table></figure>
+<p>这个错误是说最大调用堆栈大小超出，后来在<a href="http://stackoverflow.com/questions/6095530/maximum-call-stack-size-exceeded-error" target="_blank" rel="noopener">Stack Overflow</a>上找到了这样一段解释：</p>
+<blockquote>
+<p>@alex:</p>
+<p>It means that somewhere in your code, you are calling a function which in turn calls another function and so forth, until you hit the call stack limit.<br>This is almost always because of a recursive function with a base case that isn’t being met.<br>In order to fix it, ensure that your recursive function has a base case which is able to be met.</p>
+</blockquote>
+<p>这也就不难理解，为什么会堆栈溢出了。</p>
+<p>当然，代码也可以写成<code>window.onload = function() { ... }</code>这样的形式，既简洁不少，又避开了上述问题：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">document</span>.images.length; i++) &#123;</span><br><span class="line">		<span class="keyword">var</span> img = <span class="built_in">document</span>.images[i];</span><br><span class="line">		<span class="keyword">var</span> rollover = img.getAttribute(<span class="string">"data-rollover"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (!rollover) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">		(<span class="keyword">new</span> Image()).src = rollover;</span><br><span class="line">		img.setAttribute(<span class="string">"data-rollout"</span>, img.src);</span><br><span class="line"></span><br><span class="line">		img.onmouseover = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.src = <span class="keyword">this</span>.getAttribute(<span class="string">"data-rollover"</span>);</span><br><span class="line">		&#125;;</span><br><span class="line">		img.onmouseout = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.src = <span class="keyword">this</span>.getAttribute(<span class="string">"data-rollout"</span>);</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/犀牛书/" rel="tag">#犀牛书</a>
+          
+            <a href="/tags/图片/" rel="tag">#图片</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/04/jQuery实现页面查找以索引题库/" rel="next" title="jQuery实现页面查找以索引题库">
+                <i class="fa fa-chevron-left"></i> jQuery实现页面查找以索引题库
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/07/『犀牛书』读书笔记之canvas/" rel="prev" title="『犀牛书』读书笔记之canvas">
+                『犀牛书』读书笔记之canvas <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank" title="Jianshu">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//www.jianshu.com/favicon.ico" alt="Jianshu" />
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank" title="Juejin">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//juejin.im/favicon.ico" alt="Juejin" />
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            <p style="text-align: center;">WeChat ID 👉🏻biebuxin👈🏻</p>
+            <p style="text-align: center;">
+              <img src="/images/wechat.jpg" alt="剪影Boy wechat" />
+            </p>
+          </div>
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#替换图片"><span class="nav-number">1.</span> <span class="nav-text">替换图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预加载"><span class="nav-number">2.</span> <span class="nav-text">预加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优雅化"><span class="nav-number">3.</span> <span class="nav-text">优雅化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆栈溢出"><span class="nav-number">4.</span> <span class="nav-text">堆栈溢出</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

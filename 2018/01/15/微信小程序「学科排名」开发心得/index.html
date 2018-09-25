@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+<meta name="baidu-site-verification" content="2Jrddz8McN" />
+
+
+
+
+
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="/css/lato.css" rel="stylesheet" />
+  
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" />
+
+
+  <meta name="keywords" content="Node.js,小程序,SQLite,学科排名," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前几天，教育部公布了《全国第四轮学科评估结果》，在手机上看起来不太方便，就“撸起袖子加油干”，写了一套脚本把数据收集了一下，做成了微信小程序，叫「学科排名」。">
+<meta name="keywords" content="Node.js,小程序,SQLite,学科排名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序「学科排名」开发心得">
+<meta property="og:url" content="https://biebu.xin/2018/01/15/微信小程序「学科排名」开发心得/index.html">
+<meta property="og:site_name" content="别不信">
+<meta property="og:description" content="前几天，教育部公布了《全国第四轮学科评估结果》，在手机上看起来不太方便，就“撸起袖子加油干”，写了一套脚本把数据收集了一下，做成了微信小程序，叫「学科排名」。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://biebu.xin/images/posts/subjectRanking-1.jpg">
+<meta property="og:image" content="https://biebu.xin/images/posts/subjectRanking-2.jpg">
+<meta property="og:image" content="https://biebu.xin/images/posts/subjectRanking-3.jpg">
+<meta property="og:image" content="https://biebu.xin/images/posts/subjectRanking-4.jpg">
+<meta property="og:updated_time" content="2018-08-24T04:04:01.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序「学科排名」开发心得">
+<meta name="twitter:description" content="前几天，教育部公布了《全国第四轮学科评估结果》，在手机上看起来不太方便，就“撸起袖子加油干”，写了一套脚本把数据收集了一下，做成了微信小程序，叫「学科排名」。">
+<meta name="twitter:image" content="https://biebu.xin/images/posts/subjectRanking-1.jpg">
+
+
+
+<script id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: 'JYBoy'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://biebu.xin/2018/01/15/微信小程序「学科排名」开发心得/" />
+
+
+  <title> 微信小程序「学科排名」开发心得 | 别不信 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">别不信</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">剪影Boy的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-safexam">
+          <a href="/safexam" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Safexam
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sjturules">
+          <a href="/sjturules" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            SJTURules
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微信小程序「学科排名」开发心得
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-01-15T16:30:01+08:00" content="2018-01-15">
+              2018-01-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">小程序</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前几天，教育部公布了<em>《全国第四轮学科评估结果》</em>，在手机上看起来不太方便，就“撸起袖子加油干”，写了一套脚本把数据收集了一下，做成了微信小程序，叫「学科排名」。</p>
+<a id="more"></a>
+<h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><p>界面长这样：</p>
+<p><img src="../../../../images/posts/subjectRanking-1.jpg" alt="学校排名页面"></p>
+<p><img src="../../../../images/posts/subjectRanking-2.jpg" alt="专业排名页面"></p>
+<p>界面参考了一些优秀设计元素，尽量简洁、易用。</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>学科评估的结果，说白了就是某个高校的某个学科怎么样。数据库设计如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`subject_ranking`</span>  (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">smallint</span>(<span class="number">4</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'自增ID'</span>,</span><br><span class="line">    <span class="string">`universityNum`</span> mediumint(<span class="number">5</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'高校代码'</span>,</span><br><span class="line">    <span class="string">`university`</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'高校名称'</span>,</span><br><span class="line">    <span class="string">`universityLogo`</span> <span class="built_in">varchar</span>(<span class="number">31</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'高校校徽'</span>,</span><br><span class="line">    <span class="string">`klassCode`</span> <span class="built_in">char</span>(<span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'学科门类代码'</span>,</span><br><span class="line">    <span class="string">`klass`</span> <span class="built_in">varchar</span>(<span class="number">5</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'学科门类名称'</span>,</span><br><span class="line">    <span class="string">`subjectCode`</span> <span class="built_in">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'学科代码'</span>,</span><br><span class="line">    <span class="string">`subject`</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'学科名称'</span>,</span><br><span class="line">    <span class="string">`resultNum`</span> tinyint(<span class="number">1</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'学科评估结果'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>) <span class="keyword">USING</span> BTREE</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>高校代码有5位，如北京大学的是10001，其他大学的都比这个数大，所以就用了整型。</p>
+<p>学科评估结果用数字1-9来表示，其具体含义和对应关系如下表：</p>
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结果</td>
+<td>A+</td>
+<td>A</td>
+<td>A-</td>
+<td>B+</td>
+<td>B</td>
+<td>B-</td>
+<td>C+</td>
+<td>C</td>
+<td>C-</td>
+</tr>
+<tr>
+<td>含义</td>
+<td>前2%或前2名</td>
+<td>2%～5%</td>
+<td>5%～10%</td>
+<td>10%～20%</td>
+<td>20%～30%</td>
+<td>30%～40%</td>
+<td>40%～50%</td>
+<td>50%～60%</td>
+<td>60%～70%</td>
+</tr>
+</tbody>
+</table>
+<p>具体数据是通过爬虫脚本从官网获取的，有5000+条数据。</p>
+<p>考虑到后端用到了两个SELECT语句，一个是按学科代码，一个是按高校代码，建立两个单列索引：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`subject_ranking`</span> <span class="keyword">ADD</span> <span class="keyword">INDEX</span> <span class="string">`idx_subjectCode`</span>(<span class="string">`subjectCode`</span>) <span class="keyword">USING</span> BTREE;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`subject_ranking`</span> <span class="keyword">ADD</span> <span class="keyword">INDEX</span> <span class="string">`idx_universityNum`</span>(<span class="string">`universityNum`</span>) <span class="keyword">USING</span> BTREE;</span><br></pre></td></tr></table></figure>
+<h2 id="校徽"><a href="#校徽" class="headerlink" title="校徽"></a>校徽</h2><p>为了让高校排名页面视觉上更简洁大方，加上校徽元素是个不错的选择。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">"university-logo"</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;item.universityLogo&#125;&#125;"</span> <span class="attr">mode</span>=<span class="string">"aspectFit"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于校徽是图片形式，加载需要一定的时间。为了更好的体验，有必要上CDN，即内容分发网络。这里采用的是七牛云的对象存储。</p>
+<p>数据库中不同高校有近500所，校徽字段universityLogo只需存储文件名称，待响应请求的时候补全外链即可。</p>
+<h2 id="学科选择器"><a href="#学科选择器" class="headerlink" title="学科选择器"></a>学科选择器</h2><p>高校排名页面有个二级联动学科选择器，先选学科门类，再选当前门类下的学科。考虑到学科数据不多，也不会变更，所以将这部分数据放在本地了。</p>
+<p>其数据结构如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"klassCode"</span>: <span class="string">"06"</span>,</span><br><span class="line">        <span class="string">"klass"</span>: <span class="string">"人文社科类"</span>,</span><br><span class="line">        <span class="string">"children"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">"subjectCode"</span>: <span class="string">"0101"</span>,</span><br><span class="line">                <span class="string">"subject"</span>: <span class="string">"哲学"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">"subjectCode"</span>: <span class="string">"0201"</span>,</span><br><span class="line">                <span class="string">"subject"</span>: <span class="string">"理论经济学"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            ...</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"klassCode"</span>: <span class="string">"07"</span>,</span><br><span class="line">        <span class="string">"klass"</span>: <span class="string">"理学"</span>,</span><br><span class="line">        <span class="string">"children"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">"subjectCode"</span>: <span class="string">"0701"</span>,</span><br><span class="line">                <span class="string">"subject"</span>: <span class="string">"数学"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">"subjectCode"</span>: <span class="string">"0702"</span>,</span><br><span class="line">                <span class="string">"subject"</span>: <span class="string">"物理学"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            ...</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>使用两个普通选择器组件就可以方便地实现二级联动。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"selector"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">picker</span> <span class="attr">class</span>=<span class="string">"picker"</span> <span class="attr">bindchange</span>=<span class="string">"bindKlassPickerChange"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;klassIdx&#125;&#125;"</span> <span class="attr">range</span>=<span class="string">"&#123;&#123;klasses&#125;&#125;"</span> <span class="attr">range-key</span>=<span class="string">"klass"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"picker-wrapper"</span>&gt;</span>&#123;&#123;klasses[klassIdx].klass&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">picker</span> <span class="attr">class</span>=<span class="string">"picker"</span> <span class="attr">bindchange</span>=<span class="string">"bindSubjectPickerChange"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;subjectIdx&#125;&#125;"</span> <span class="attr">range</span>=<span class="string">"&#123;&#123;subjects&#125;&#125;"</span> <span class="attr">range-key</span>=<span class="string">"subject"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"picker-wrapper"</span>&gt;</span>&#123;&#123;util.getSubject4Short(subjects[subjectIdx].subject, 8)&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="高校列表"><a href="#高校列表" class="headerlink" title="高校列表"></a>高校列表</h2><p>高校排名页面每次加载时，按选定学科去请求高校排名数据。不少学科对应的高校数据量很大，而我们首先看到的只是前几个，可以对高校列表进行分页。</p>
+<p>结合实际情况，只分两步走——首先请求前10条高校记录，然后请求剩下的部分。当然，如果第一次请求获得的高校记录少于10条，也就没必要再次请求了。</p>
+<p>分步请求的逻辑如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">requestUniversities: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    wx.showNavigationBarLoading();</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">        url: config.getUniversityRankingUrl(<span class="keyword">this</span>.data.subjects[<span class="keyword">this</span>.data.subjectIdx].subjectCode, <span class="number">1</span>),</span><br><span class="line">        success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            wx.hideNavigationBarLoading();</span><br><span class="line">            <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">                universities: res.data.data</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.data.universities.length === <span class="number">10</span>) &#123;</span><br><span class="line">                wx.request(&#123;</span><br><span class="line">                    url: config.getUniversityRankingUrl(<span class="keyword">this</span>.data.subjects[<span class="keyword">this</span>.data.subjectIdx].subjectCode, <span class="number">0</span>),</span><br><span class="line">                    success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">                        <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">                            universities: <span class="keyword">this</span>.data.universities.concat(res.data.data)</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>采用分步加载后，首页加载速度提升明显，加上校徽给力的CDN，次次秒开不是梦。</p>
+<h2 id="rpx在Plus机型的一处Bug"><a href="#rpx在Plus机型的一处Bug" class="headerlink" title="rpx在Plus机型的一处Bug"></a>rpx在Plus机型的一处Bug</h2><p>先看现象：</p>
+<p><img src="../../../../images/posts/subjectRanking-3.jpg" alt="rpx在Plus机型的Bug"></p>
+<p>就是中间的那条白线——它并不是设计元素！</p>
+<p>对应的CSS代码如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.background</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">375</span>rpx;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#4facf7</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.background</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">bottom</span>: -<span class="number">150</span>rpx;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">border-top</span>: <span class="number">150</span>rpx solid <span class="number">#4facf7</span>;</span><br><span class="line">    <span class="attribute">border-right</span>: <span class="number">375</span>rpx solid transparent;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">375</span>rpx solid transparent;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经过测试，发现当屏幕宽度大于375px时，会出现这个Bug。显然，这个问题是由于rpx换算px的误差被放大导致的。</p>
+<p>解决的思路也简单——当屏幕宽度大于375px时，往上挪1px就好了。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.background-plus</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="built_in">calc</span>(-150rpx + 1px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那怎么判断屏幕宽度大于375px？小程序提供了现成的API：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">wx.getSystemInfo(&#123;</span><br><span class="line">    success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (res.screenWidth &gt; <span class="number">375</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.isPlus = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="小程序码"><a href="#小程序码" class="headerlink" title="小程序码"></a>小程序码</h2><p>小程序「学科排名」已发布，欢迎体验。</p>
+<p><img src="../../../../images/posts/subjectRanking-4.jpg" alt="学科排名"></p>
+<p>以上。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+            <a href="/tags/小程序/" rel="tag">#小程序</a>
+          
+            <a href="/tags/SQLite/" rel="tag">#SQLite</a>
+          
+            <a href="/tags/学科排名/" rel="tag">#学科排名</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/27/Markdown自定义扩展语法之注音标示/" rel="next" title="Markdown自定义扩展语法之注音标示">
+                <i class="fa fa-chevron-left"></i> Markdown自定义扩展语法之注音标示
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/16/Windows平台Node-js实现复制任意文本到剪贴板/" rel="prev" title="Windows平台Node.js实现复制任意文本到剪贴板">
+                Windows平台Node.js实现复制任意文本到剪贴板 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzkyOC80NTA1">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="剪影Boy" />
+          <p class="site-author-name" itemprop="name">剪影Boy</p>
+          <p class="site-description motion-element" itemprop="description">别不信是剪影Boy的技术博客，主要记录剪影Boy技术之路的探索心得</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jyboy" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ae0aa1c3bae9" target="_blank" title="Jianshu">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//www.jianshu.com/favicon.ico" alt="Jianshu" />
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/577c6a480a2b580057344a9a/posts" target="_blank" title="Juejin">
+                  
+                  
+                    <img style="display: inline-block; width: 11.16px;" src="//juejin.im/favicon.ico" alt="Juejin" />
+                  
+                  Juejin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            <p style="text-align: center;">WeChat ID 👉🏻biebuxin👈🏻</p>
+            <p style="text-align: center;">
+              <img src="/images/wechat.jpg" alt="剪影Boy wechat" />
+            </p>
+          </div>
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#界面"><span class="nav-number">1.</span> <span class="nav-text">界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#校徽"><span class="nav-number">3.</span> <span class="nav-text">校徽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学科选择器"><span class="nav-number">4.</span> <span class="nav-text">学科选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高校列表"><span class="nav-number">5.</span> <span class="nav-text">高校列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpx在Plus机型的一处Bug"><span class="nav-number">6.</span> <span class="nav-text">rpx在Plus机型的一处Bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小程序码"><span class="nav-number">7.</span> <span class="nav-text">小程序码</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">剪影Boy</span><span id="busuanzi_container_site_pv">&nbsp;&nbsp;|&nbsp;&nbsp;Total Visits <span id="busuanzi_value_site_pv"></span></span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  <script>
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = '//cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>
