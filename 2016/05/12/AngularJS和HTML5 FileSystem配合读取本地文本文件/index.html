@@ -66,7 +66,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" />
 
 
-  <meta name="keywords" content="Ionic,AngularJS,FileSystem," />
+  <meta name="keywords" content="Ionic,Angular," />
 
 
 
@@ -83,14 +83,14 @@
 
 
 <meta name="description" content="Ionic由于其使用Web技术构建移动应用程序的特性，注定在调用系统原生API方面存在先天不足，一般需要ngCordova插件或引入HTML5新特性才能实现。本文主要介绍在Ionic框架下利用AngularJS和HTML5 FileSystem的特性，实现读取本地文本文件功能。">
-<meta name="keywords" content="Ionic,AngularJS,FileSystem">
+<meta name="keywords" content="Ionic,Angular">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS和HTML5 FileSystem配合读取本地文本文件">
 <meta property="og:url" content="https://biebu.xin/2016/05/12/AngularJS和HTML5 FileSystem配合读取本地文本文件/index.html">
 <meta property="og:site_name" content="别不信">
 <meta property="og:description" content="Ionic由于其使用Web技术构建移动应用程序的特性，注定在调用系统原生API方面存在先天不足，一般需要ngCordova插件或引入HTML5新特性才能实现。本文主要介绍在Ionic框架下利用AngularJS和HTML5 FileSystem的特性，实现读取本地文本文件功能。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-24T04:04:01.427Z">
+<meta property="og:updated_time" content="2018-09-30T11:14:43.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS和HTML5 FileSystem配合读取本地文本文件">
 <meta name="twitter:description" content="Ionic由于其使用Web技术构建移动应用程序的特性，注定在调用系统原生API方面存在先天不足，一般需要ngCordova插件或引入HTML5新特性才能实现。本文主要介绍在Ionic框架下利用AngularJS和HTML5 FileSystem的特性，实现读取本地文本文件功能。">
@@ -302,8 +302,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
-                    <span itemprop="name">AngularJS</span>
+                  <a href="/categories/Angular/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular</span>
                   </a>
                 </span>
 
@@ -334,7 +334,7 @@
       
 
       
-        <p><code>Ionic</code>由于其使用Web技术构建移动应用程序的特性，注定在调用系统原生API方面存在先天不足，一般需要<a href="http://ngcordova.com/" target="_blank" rel="noopener">ngCordova</a>插件或引入HTML5新特性才能实现。本文主要介绍在Ionic框架下利用AngularJS和HTML5 FileSystem的特性，实现读取本地文本文件功能。</p>
+        <p>Ionic由于其使用Web技术构建移动应用程序的特性，注定在调用系统原生API方面存在先天不足，一般需要<a href="http://ngcordova.com/" target="_blank" rel="noopener">ngCordova</a>插件或引入HTML5新特性才能实现。本文主要介绍在Ionic框架下利用AngularJS和HTML5 FileSystem的特性，实现读取本地文本文件功能。</p>
 <a id="more"></a>
 <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>在Cmd窗口中输入<code>ionic start your-app-name blank</code>回车，新建Ionic空白项目后，在<code>your-app-name\www\index.html</code>中<code>&lt;ion-content&gt;&lt;/ion-content&gt;</code>标签内写入：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"textCtrl"</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Select text file<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">on-read-file</span>=<span class="string">"showContent($fileContent)"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-if</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>File content is:<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">pre</span>&gt;</span>&#123;&#123; content &#125;&#125;<span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -374,9 +374,7 @@
           
             <a href="/tags/Ionic/" rel="tag">#Ionic</a>
           
-            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
-          
-            <a href="/tags/FileSystem/" rel="tag">#FileSystem</a>
+            <a href="/tags/Angular/" rel="tag">#Angular</a>
           
         </div>
       
@@ -467,7 +465,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -484,7 +482,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
