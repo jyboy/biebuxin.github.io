@@ -91,7 +91,7 @@
 <meta property="og:description" content="最近有个项目，需要将一些用户数据导入到数据库中，有4000w+行之多…">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://biebu.xin/images/posts/multiple-selections-1.gif">
-<meta property="og:updated_time" content="2018-09-30T12:10:34.626Z">
+<meta property="og:updated_time" content="2018-10-01T10:32:58.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅读写超大文本文件">
 <meta name="twitter:description" content="最近有个项目，需要将一些用户数据导入到数据库中，有4000w+行之多…">
@@ -339,22 +339,22 @@
         <p>最近有个项目，需要将一些用户数据导入到数据库中，有4000w+行之多…</p>
 <a id="more"></a>
 <p>现在要做的，是将一行行<code>1000000001</code>这样的ID，转成对应的<code>INSERT INTO tbUser (id) VALUES (&#39;1000000001&#39;);</code>这样的SQL语句，处理的方式有很多种，我们一个个来 ⬇️⬇️⬇️</p>
-<h3 id="多行游标"><a href="#多行游标" class="headerlink" title="多行游标"></a>多行游标</h3><p>Sublime、VS Code等编辑器都有多行游标的功能，使用起来非常方便。</p>
+<h2 id="多行游标"><a href="#多行游标" class="headerlink" title="多行游标"></a>多行游标</h2><p>Sublime、VS Code等编辑器都有多行游标的功能，使用起来非常方便。</p>
 <p><img src="../../../../images/posts/multiple-selections-1.gif" alt="学校排名页面"></p>
 <p>但如果文件行数在千万级，就尴尬了——光打开就已非常吃力，还想多行同时操作？现实是，在内存16G的电脑上，多行游标根本「游」不起来！</p>
-<h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><p>作为Linux常用的文本处理命令之一，sed很适合这样的使用场景。</p>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>作为Linux常用的文本处理命令之一，sed很适合这样的使用场景。</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sed <span class="string">"s/.*/INSERT INTO tbUser (id) VALUES ('&amp;');/"</span> id.txt &gt; id1.txt</span><br></pre></td></tr></table></figure>
 <p>其中，<code>s</code>表示替换，<code>/.*/</code>表示匹配除了回车换行等外的所有字符——这里就是整行文本，<code>/INSERT INTO tbUser (id) VALUES (&#39;&amp;&#39;);/</code>表示将匹配的文本进行相应的替换，里面的<code>&amp;</code>表示匹配的文本。</p>
-<h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><p>说了sed，awk怎么能不提。同样是Linux常用的文本处理命令，awk处理起来也不在话下。</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>说了sed，awk怎么能不提。同样是Linux常用的文本处理命令，awk处理起来也不在话下。</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;print "INSERT INTO tbUser (id) VALUES ('</span>\<span class="string">''</span><span class="string">"<span class="variable">$0</span>"</span><span class="string">'\'</span><span class="string">');"&#125;'</span> id.txt &gt; id2.txt</span><br></pre></td></tr></table></figure>
 <p>awk语句被<code>&#39;{ }&#39;</code>包起来，里面的<code>$0</code>表示整行文本。</p>
-<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><blockquote>
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><blockquote>
 <p>人生苦短，我用Python.</p>
 </blockquote>
 <p>作为最常用的脚本语言之一，Python写起来也很OK.</p>
 <figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'id.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> r, open(<span class="string">'id3.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> w:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> r:</span><br><span class="line">        w.write(<span class="string">"INSERT INTO tbUser (id) VALUES ('"</span> + line.rstrip(os.linesep) + <span class="string">"');"</span> + os.linesep)</span><br></pre></td></tr></table></figure>
 <p><code>with</code>语句可以自动关闭打开的文件句柄，形式比传统的<code>try/finally</code>更加简洁。<code>os.linesep</code>表示行终止符，在Windows上是<code>\r\n</code>，在macOS上是<code>\r</code>，在Linux上是<code>\n</code>.</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这三种方法处理起来都很快——读写4000w+行，不到1分钟，也就泡杯茶的工夫。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这三种方法处理起来都很快——读写4000w+行，不到1分钟，也就泡杯茶的工夫。</p>
 <p>在实际工作中，怎么顺手怎么来就好了。</p>
 
       
@@ -562,7 +562,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多行游标"><span class="nav-number">1.</span> <span class="nav-text">多行游标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed"><span class="nav-number">2.</span> <span class="nav-text">sed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk"><span class="nav-number">3.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">4.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多行游标"><span class="nav-number">1.</span> <span class="nav-text">多行游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sed"><span class="nav-number">2.</span> <span class="nav-text">sed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk"><span class="nav-number">3.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python"><span class="nav-number">4.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
